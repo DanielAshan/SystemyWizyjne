@@ -1,0 +1,330 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+using Emgu.CV;
+using Emgu.CV.Structure;
+
+namespace Kolor
+{
+    public partial class Form1 : Form
+    {
+        //UWAGA! Zadanie - zapoznać się z konstrukcją programu. Posprarawdzać które kontrolki
+        //jak są nazwane i jakie procedury obsługi zdarzeń są dla nich powołane. Zadanie polega
+        //na uzupełnianiu dostarczonych fragmentów. Zmienne globalne przechowujące dane obrazu są już
+        //zadeklarowane i stworzone jako globalne.
+
+        //WAŻNE
+        //W przypadku problemów i niejasności należy odwoływać się do internetowej
+        //pomocy w postaci dokumentacji C# (msdn), dokumentacji EmguCV oraz stron takich
+        //jak stackOverflow
+        //VisualStudio zamiera narzędzie podpowiadające przy pisaniu kodu. Narzedzie to
+        //nazywa się intelisense i jeśli jego okno (rozwijana lista możliwych zakończeń
+        //aktualnie pisanego tekstu) nie pojawia się lub znikła to skrót: CTRL + SPACE je wywoła
+        //Nieco innym narzędziem są podpowiedzi co do argumentów aktualnie pisanego wywołania metody.
+        //Wyskoczy wtedy okno, które poinformuje o oczekiwanych typach i kolejności przekazywanych
+        //argumentów. Jak to okno zniknie to CTRL + SPACE może go już nie wywołać. Do jego
+        //ponownego wyświetlenie należy wtedy np skasować i ponownie wpisać jakiś element
+        //wpisanego tekstu np znak "(". Nie chodzi o kasowanie wszystkiego tylko o to by ponownie
+        //zaistniały warunki jak przy pierwszym wyskoczeniu okna.
+        //wtedy okno ponownie się pojawi
+
+        //Koońcówka PB1 i PB2 odnoszą sie do nazw
+        //pictureBox1 i pictureBox2
+        //Deklaracja zmiennych przechowujących obrazy
+        //Zmienne jedynie zadeklarowane muszą zostać jeszcze utworzone
+        Image<Bgr, byte> obraz_PB1, obraz_PB2, wykres_PB1, wykres_PB2;
+
+        //Typ videocapture służyć nam będzie do łączenia się z kamerą
+        VideoCapture kamera;
+
+        //Tzw. konstruktor. Odpowiada za zainicjalizowanie całego okienka programu
+        public Form1()
+        {
+            InitializeComponent();
+            //Tworzenie obiektów.
+            obraz_PB1 = new Image<Bgr, byte>(left_image.Size);
+            obraz_PB2 = new Image<Bgr, byte>(right_image.Size);
+            wykres_PB1 = new Image<Bgr, byte>(color_components_left_graph.Size);
+            wykres_PB2 = new Image<Bgr, byte>(color_components_right_graph.Size);
+
+            //Blok try - catch. Jak nie ma kamery to pruba stworzenia obiektu VideoCapture może
+            //być nieudana. Z tego względu zastosujemy blok try catch, który w przypadku niepowodzenia
+            //tej operacji przechwyci i wyświtli komunikat błędu, a program nie zakończy się nagle błędem
+            //Blok try - catch jest elementem języka C# i nie pochodzi od EmguCV
+            try
+            {
+                //Domyślnie połączy się z pierwszym urządzeniem video na liście urządzeń
+                kamera = new VideoCapture();
+                //Ustawienia wysokości i szerokości obrazu
+                kamera.SetCaptureProperty(Emgu.CV.CvEnum.CapProp.FrameWidth, 320);
+                kamera.SetCaptureProperty(Emgu.CV.CvEnum.CapProp.FrameHeight, 240);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+        }
+
+        //Dyrektywa #region i kończoca jąa ddyrektywa #endregion służą do zwijania kawałków kodu
+        //w edytorze. Dyrektywy te w żaden sposób nie wpływają na kompilacje i działanie programu.
+        //NAleży jedynie pamiętać o tym by każdy #region miał do pary kończącego go #endregion
+        #region Sekcja 1: Wczytywanie i czyszczenie obrazów
+
+        private void image_left_button_Click(object sender, EventArgs e)
+        {
+            //Obrazek tworzony za pomocą metod z Emgu cv
+            //CvInvoke.Rectangle - rysuje prostokąt wypełnioony lub tylko jego boki
+            //new Rectangle(20, 20, 50, 50) - powołuje nowy obiekt typu Rectangle (nie CvInvoke.Rectangle tylko zwykłe Rectagle)
+            //new MCvScalar(255, 200, 140)  - typ ten pochodzi z biblioteki Emgu i w tym przypadku
+            //służy do utworzenia koloru - kolejne argumenty odpowiadają kolejnym składowym
+            //Parametr thickness (tutaj równy -1) odpowiada grubości ramki jeśli dodatni. ujemny powoduje zamalowanie wnętrza
+            CvInvoke.Rectangle(obraz_PB1, new Rectangle(20, 20, 50, 50), new MCvScalar(255, 200, 140), -1);
+            //Analogicznie działają metody CvInvoke.Circle oraz CvInvoke.Line
+
+            //UWAGA! Zadanie: Dopisać jeszcze jeden prostokąt (o innych wymiarach i kolorze niż obecny)
+            //oraz dodać kółko i linie
+
+            //Wyświetlanie obrazu na pictureBoxie
+            //PictureBox trzyma obrazy jako bitmapy co jest wspierane przez typ Image. 
+            //Właściwość Bitmap jest odczytywana jak po nazwie zmiennej typu Image wpiszemy
+            //kropkę i następnie wpiszemy bądź wybierzemy z pomosy Intelisense frazę "Bitmap"
+            left_image.Image = obraz_PB1.Bitmap;
+        }
+
+        private void from_file_left_button_Click(object sender, EventArgs e)
+        {
+            //EmguCV posiada dwa różne typy zdolne do przechowywania obrazu. Poza Image<>
+            //istnieje nowszy typ - Mat. Mat w przeciwieństwie do Image współpracuje z wieloma
+            //bardziej zaawansowanymi metodami biblioteki, natomiast dostęp do pojedynczych 
+            //pikseli jest w nim utrudniony. Ze względu na to utrudnienie korzystamy z typu Image<>.
+
+            //Możliwe jest jednak wywołanie danej metody z wykorzystaniem typu Mat, a następnie
+            //przetransformowania jego danych do typu Image<>, co daje nam pełny wachlaż możliwości
+            //Jedną z takich metod jest metoda do odczytywania obrazka z pliku czyli Imread;
+            //Dlatego też posłużymy się pomocniczą zmienną typu Mat
+            Mat temp = new Mat();
+            temp = CvInvoke.Imread(@"wkleić poprawną ścieżkę do pliku ");
+            //Obrazek moze mieć inny rozmiar od rozmiaru pictureboxa, dlatego dokonamy jego skalowania
+            CvInvoke.Resize(temp, temp, left_image.Size);
+            //Przypisawanie danych z Mat do Image<>
+            obraz_PB1 = temp.ToImage<Bgr, byte>();
+
+            //UWAGA! Zadanie: Na podstawie przycisku tworzącego grafikę, wyświetlić dane z obraz_PB1 na pictureboxie
+        }
+
+        private void camera_left_button_Click(object sender, EventArgs e)
+        {
+            //Tutaj konstrukcja tworzenia obiektu "= new Mat();" Została pominięta, gdyż w przypadku
+            //kiedy jakaś metoda (w tym przypadku jest to QueryFrame - metoda odczytująca klatkę 
+            //obrazu z kamery) zwraca interesujący nas typ danych to oznacza to, że wewnętrznie został
+            //on stworzony. Jak został stworzony to może być przypisany bez konieczności słowa "new"
+            Mat temp = kamera.QueryFrame();
+            CvInvoke.Resize(temp, temp, left_image.Size);
+
+            //UWAGA! Zadanie: Dopisać kopiowanie danych z mat do image i wyświetlić na
+            //pictureboxie
+        }
+
+        private void image_right_button_Click(object sender, EventArgs e)
+        {
+            //UWAGA! Zadanie Zaimplementować rysowanie grafiki dla pictureboxa2 analogicznie
+            //do pictureboxa1
+        }
+
+        private void from_file_right_button_Click(object sender, EventArgs e)
+        {
+            //UWAGA! Zadanie Zaimplementować wczytywanie obrazu z pliku dla pictureboxa2 analogicznie
+            //do pictureboxa1
+        }
+
+        private void camera_right_button_Click(object sender, EventArgs e)
+        {
+            //UWAGA! Zadanie Zaimplementować wczytywanie obrazu z kamery dla pictureboxa2 analogicznie
+            //do pictureboxa1
+        }
+
+        private void clear_left_image_button_Click(object sender, EventArgs e)
+        {
+            //Metoda SetZero ustawia wartość 0 w całym obrazie. Odpowiada to kolorowi czarnemu
+            //i jest równoznaczne z wyczyszczeniem go
+            obraz_PB1.SetZero();
+            left_image.Image = obraz_PB1.Bitmap;
+        }
+
+        private void clear_right_image_button_Click(object sender, EventArgs e)
+        {
+            //UWAGA! Zadanie - zaimplementować czyszczenia dla obrazka 2
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        #endregion
+
+        #region Sekcja 2 Selektywne kopiowanie składowych koloru + operacja mono
+
+        private void left_image_Click(object sender, EventArgs e)
+        {
+            //Każda metoda obsługi zdażenia wywołuje się z dwoma argumantami.
+            //Pierwszy: "object sender" jest to odwołanie do obiektu, który zgłosił dane zdażenie.
+            //Drugi: "EventArgs e" jest to instancja klasy służącej do przekazania w zapakowany
+            //sposób zbioru parametrów z jakimi dane zdażenie zostało wywołane.
+            //Pierwsszy argument nie będzie teraz wykorzystywany, natomiast współrzędne kliknięcia
+            //zostaną pobrane z drugiego.
+
+            //Poniewarz jest to zdarzenie "Click" to w argumencie będą współrzędne kliknięcia
+            //Aby się do nich dostać należy potraktować typ EventArgs tak jakby był typem
+            //MouseEventArgs - typ ten już ma te współrzędne.
+            //WAŻNE! To nie jest "całkowicie nowy obiekt" to jest tylko odwoływanie się do
+            //istniejącego obiektu TAK JAKBY był innym typem. Podejście takie zadziała tak długo, jak
+            //dany typ będzie wewnętrznie zgodny z tym drugim.
+            MouseEventArgs me = e as MouseEventArgs;
+
+            left_image_x_text_box.Text = me.X.ToString();
+            //UWAGA! Zadanie - uzupełnić dla "Y"
+
+            //Listing koloru
+            //Typ Image<Bgr, byte> przechowuje wewnętrznie dane obrazu jako tablice trójwymiarową
+            //typu byte. Dostęp do tej tablicy znajduje się pod właściwością "Data"
+            //Aby odwoływanie się było wygodiejsze to zastosujemy zmienno lokalną pomocniczą
+            //typu byte[,,] do której przypiszemy właściwość "Data"
+            byte[,,] temp1 = obraz_PB1.Data;
+
+            //KOLEJNOŚC indeksów:
+            //temp1[Y, X, kanał koloru]: 0 - kanał niebieski, 1 - zielony, 2 - czerwony
+
+            //Wyświetliwy wartości składowe
+            //Jak w metodzie ToString przekażemy parametr "X" to liczba zostanie zamieniona na tekst
+            //sformatowany szesnastkowo np FF zamiast 255
+            //Formatowanie to nie doda natomiast wygodnego dla użytkownika przedrostka "0x", który
+            //informuje uytkownika, że ma do czynienia z tekstem szesnastkowym
+            blue_textbox.Text = "0x" + temp1[me.Y, me.X, 0].ToString("X");
+            //UWAGA! Zadanie - uzupełnić dla pozostałych składowych
+            //UWAGA! Zadanie - sprawdzić poprawność przypysania liczb do textboxów testując program w działaniu
+        }
+
+        //UWAGA! Zadanie Skopiować textboxy od współrzędnych kliknięcia i listingu koloru,
+        //Powołać obsługę zdażenia Click dla picturebboxa2 i powtórzyć funkcjonalność z picturebox1
+
+        private void left2right_copy_button_Click(object sender, EventArgs e)
+        {
+            //Wykorzystamy maski i operacje logiczną AND.
+            //Jeśli maska jest równa 0 to operacja AND między nią a dowolną liczbą zwróci 0
+            //Jeśli maska jest równa 255 (0xFF, 0b11111111) to AND między nią a dowolną liczbą typu bajt, zachowa wartość tego bajtu
+            byte maska_B, maska_G, maska_R;
+            maska_B = maska_G = maska_R = 0;
+
+            if (blue_checkbox.Checked) maska_B = 0xFF;
+            if (green_checkbox.Checked) maska_G = 0xFF;
+            if (red_checkbox.Checked) maska_R = 0xFF;
+
+            byte[,,] temp1 = obraz_PB1.Data;
+            byte[,,] temp2 = obraz_PB2.Data;
+
+            for (int x = 0; x < left_image.Width; x++)
+            {
+                for (int y = 0; y < left_image.Height; y++)
+                {
+                    temp2[y, x, 0] = (byte)(temp1[y, x, 0] & maska_B);
+                    //UWAGA! zadanie - dokończyć zapis dla pozostałych kanałów koloru
+                }
+            }
+
+            obraz_PB2.Data = temp2;
+            //UWAGA! zadanie - poprawnie wyświetlić dane na pictureboxie2
+        }
+
+        private void right2left_copy_button_Click(object sender, EventArgs e)
+        {
+            //Uwaga zadanie - zaimplementować operację kopiowanie wybranych kanałów koloru z prawej na lewą
+
+        }
+
+        private void mono_copy_button_Click(object sender, EventArgs e)
+        {
+            //UWAGA! Zadanie - zaimplementować operację kopiowanie obrazka kolorowego z picturbox1 na picturebox2
+            //po drodze przzetwarzając go na obraz w skali szarości
+            //Dla pikselu kolorowego w przestrzeni Bgr jego odpowiednik w skali szarości to piksel o takich samych
+            //wartościach składowych koloru i równych średniej arytmetycznej skłądowych koloru piksela wejściowego.
+            //(Dla każdego piksela osobno): mono = (R + G + B) / 3;
+            //Maski nie będą potrzebne
+            int mono;
+        }
+
+        #endregion
+
+        #region Sekcja 3 - Wykresy linii
+
+        private void line_graph_left_image_button_Click(object sender, EventArgs e)
+        {
+            //Wykres linii obrazu. Celem działania jest predstawienie pojedyncxzego wiersza obrazu
+            //w postaci trzech wykresów rysowanych razem, na jednym pictureboxie.
+            //Dzięki temu otrzymamy wykresy zmienności składowych koloru w danym wierszu
+            //Współrzędna Y określająca analizowany wiersz powinna pochodzić z okienka textBox_Y
+            //Wartość każdej składowej piksela obrazu wejściowego będzie zatem współrzędną Y na 
+            //odpowiadającym jej wykresie.
+
+            //Ponieważ zakres pojedynczej składowe (głębia koloru) to bajt czyli 0 - 255, a wysokość
+            //pictureboxa z wykresem jest inna to musimy odczytane wartości składowe przeskalować do
+            //nowego zakresu. Dodatkowo punkt (0, 0) odpowiada lewemu górnemu rogowi pixtureboxa i 
+            //wrtości współrzędnej Y narastają w dół to musimy odwrócić współrzędną Y
+
+            wykres_PB1.SetZero();
+            byte[,,] temp_obraz = obraz_PB1.Data;
+            byte[,,] temp_wykres = wykres_PB1.Data;
+
+            int wybrana_linia = 0; //UWAGA! Zadanie - odczytać liczzbę z textboxa_Y
+            int wys_wykresu = color_components_left_graph.Height - 1; //"-1" aby nie przekraczać indeksów tablicy
+            double scale = wys_wykresu / 255.0;
+
+            byte B, G, R;
+
+            for (int x = 0; x < left_image.Width; x++)
+            {
+                B = temp_obraz[wybrana_linia, x, 0];
+                G = temp_obraz[wybrana_linia, x, 1];
+                R = temp_obraz[wybrana_linia, x, 2];
+
+                //UWAGA! Zadanie - dokończyć implementację pętli. Dokonać skalowania i odwrócenia
+                //wartości odczytanych i namalować je na wykresie
+
+                //Składowa = (byte)(wysokosc - Składowa * współczynnik_skalujący)
+
+                //temp_wykres[przeskalowana_i_odwrocona_skladowa, x, kanal_danej_skladowej] = 0xFF;
+
+            }
+            //UWAGA! Zadanie - wyświetlić dane na wykresie
+        }
+
+        private void line_graph_right_image_button_Click(object sender, EventArgs e)
+        {
+            //UWAGA! Zadanie - Analogicznie do linii dla obrazka 1 powtórzyć operację dla obrazka2.
+            //UWAGA - współrzędną Y określającą wybraną linię pobrać z dokładnie tego samego miejsca
+            //co dla obrazka 1
+        }
+
+        private void button_Simple_Movie_Click(object sender, EventArgs e)
+        {
+            //UWAGA! Zadanie końcowe. Wykonać dopiero wtedy gdy Sekcje od 1 do 3 są gotowe.
+            //1) Dodać timer, ustawić interwał na 50ms, powołać zdażenie tick
+            //2) dodać globalną zmienną typu bool, która będzie przełączana na true jeśli jest false
+            //lub na false jeśli jest true, każdorazowo po każdym wciśnięciu tego przycisku.
+            //3) Po przestawieniu wartości, także w tym przycisku w zależności od tego czy aktualnie
+            //jzmienna bool jest true lub false to wywoływać na timerze metody Start i Stop
+            //4) W obsłudze zdażenia Tick dodać kod odbierający obraz z kamery i wyrysować dla niego wykres
+            //5) W tym celu należy implementację wykreślania linii skopiować do osobnej (własnoręcznie stworzonej) metody
+            //która będzie wywoływana albo z przycisku albo z timera. Dzięki temu nie będzie nadmiernego kopiowania raz stworzonego kodu
+        }
+
+        #endregion 
+    }
+}

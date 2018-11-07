@@ -1,0 +1,471 @@
+﻿namespace Kolor
+{
+    partial class Form1
+    {
+        /// <summary>
+        /// Wymagana zmienna projektanta.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Wyczyść wszystkie używane zasoby.
+        /// </summary>
+        /// <param name="disposing">prawda, jeżeli zarządzane zasoby powinny zostać zlikwidowane; Fałsz w przeciwnym wypadku.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Kod generowany przez Projektanta formularzy systemu Windows
+
+        /// <summary>
+        /// Metoda wymagana do obsługi projektanta — nie należy modyfikować
+        /// jej zawartości w edytorze kodu.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.image_left_button = new System.Windows.Forms.Button();
+            this.from_file_left_button = new System.Windows.Forms.Button();
+            this.camera_left_button = new System.Windows.Forms.Button();
+            this.left_image_x_text_box = new System.Windows.Forms.TextBox();
+            this.left_image_y_text_box = new System.Windows.Forms.TextBox();
+            this.left_image_x_label = new System.Windows.Forms.Label();
+            this.left_image_y_label = new System.Windows.Forms.Label();
+            this.left_image = new System.Windows.Forms.PictureBox();
+            this.clear_left_image_button = new System.Windows.Forms.Button();
+            this.line_graph_left_image_button = new System.Windows.Forms.Button();
+            this.color_components_left_graph = new System.Windows.Forms.PictureBox();
+            this.color_components_right_graph = new System.Windows.Forms.PictureBox();
+            this.line_graph_right_image_button = new System.Windows.Forms.Button();
+            this.clear_right_image_button = new System.Windows.Forms.Button();
+            this.right_image = new System.Windows.Forms.PictureBox();
+            this.right_image_y_label = new System.Windows.Forms.Label();
+            this.right_image_x_label = new System.Windows.Forms.Label();
+            this.right_image_y_text_box = new System.Windows.Forms.TextBox();
+            this.right_image_x_text_box = new System.Windows.Forms.TextBox();
+            this.camera_right_button = new System.Windows.Forms.Button();
+            this.from_file_right_button = new System.Windows.Forms.Button();
+            this.image_right_button = new System.Windows.Forms.Button();
+            this.color_listing_label = new System.Windows.Forms.Label();
+            this.blue_textbox = new System.Windows.Forms.TextBox();
+            this.green_textbox = new System.Windows.Forms.TextBox();
+            this.red_textbox = new System.Windows.Forms.TextBox();
+            this.green_checkbox = new System.Windows.Forms.CheckBox();
+            this.blue_checkbox = new System.Windows.Forms.CheckBox();
+            this.red_checkbox = new System.Windows.Forms.CheckBox();
+            this.mono_copy_button = new System.Windows.Forms.Button();
+            this.right2left_copy_button = new System.Windows.Forms.Button();
+            this.left2right_copy_button = new System.Windows.Forms.Button();
+            this.button_Simple_Movie = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.left_image)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.color_components_left_graph)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.color_components_right_graph)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.right_image)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // image_left_button
+            // 
+            this.image_left_button.Location = new System.Drawing.Point(12, 12);
+            this.image_left_button.Name = "image_left_button";
+            this.image_left_button.Size = new System.Drawing.Size(81, 32);
+            this.image_left_button.TabIndex = 0;
+            this.image_left_button.Text = "Grafika";
+            this.image_left_button.UseVisualStyleBackColor = true;
+            this.image_left_button.Click += new System.EventHandler(this.image_left_button_Click);
+            // 
+            // from_file_left_button
+            // 
+            this.from_file_left_button.Location = new System.Drawing.Point(99, 12);
+            this.from_file_left_button.Name = "from_file_left_button";
+            this.from_file_left_button.Size = new System.Drawing.Size(81, 32);
+            this.from_file_left_button.TabIndex = 1;
+            this.from_file_left_button.Text = "Z pliku";
+            this.from_file_left_button.UseVisualStyleBackColor = true;
+            this.from_file_left_button.Click += new System.EventHandler(this.from_file_left_button_Click);
+            // 
+            // camera_left_button
+            // 
+            this.camera_left_button.Location = new System.Drawing.Point(186, 12);
+            this.camera_left_button.Name = "camera_left_button";
+            this.camera_left_button.Size = new System.Drawing.Size(81, 32);
+            this.camera_left_button.TabIndex = 2;
+            this.camera_left_button.Text = "Kamera";
+            this.camera_left_button.UseVisualStyleBackColor = true;
+            this.camera_left_button.Click += new System.EventHandler(this.camera_left_button_Click);
+            // 
+            // left_image_x_text_box
+            // 
+            this.left_image_x_text_box.Location = new System.Drawing.Point(13, 51);
+            this.left_image_x_text_box.Name = "left_image_x_text_box";
+            this.left_image_x_text_box.Size = new System.Drawing.Size(100, 20);
+            this.left_image_x_text_box.TabIndex = 3;
+            // 
+            // left_image_y_text_box
+            // 
+            this.left_image_y_text_box.Location = new System.Drawing.Point(13, 77);
+            this.left_image_y_text_box.Name = "left_image_y_text_box";
+            this.left_image_y_text_box.Size = new System.Drawing.Size(100, 20);
+            this.left_image_y_text_box.TabIndex = 4;
+            // 
+            // left_image_x_label
+            // 
+            this.left_image_x_label.AutoSize = true;
+            this.left_image_x_label.Location = new System.Drawing.Point(120, 57);
+            this.left_image_x_label.Name = "left_image_x_label";
+            this.left_image_x_label.Size = new System.Drawing.Size(12, 13);
+            this.left_image_x_label.TabIndex = 5;
+            this.left_image_x_label.Text = "x";
+            // 
+            // left_image_y_label
+            // 
+            this.left_image_y_label.AutoSize = true;
+            this.left_image_y_label.Location = new System.Drawing.Point(120, 84);
+            this.left_image_y_label.Name = "left_image_y_label";
+            this.left_image_y_label.Size = new System.Drawing.Size(12, 13);
+            this.left_image_y_label.TabIndex = 6;
+            this.left_image_y_label.Text = "y";
+            // 
+            // left_image
+            // 
+            this.left_image.BackColor = System.Drawing.Color.Black;
+            this.left_image.Location = new System.Drawing.Point(12, 104);
+            this.left_image.Name = "left_image";
+            this.left_image.Size = new System.Drawing.Size(320, 240);
+            this.left_image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.left_image.TabIndex = 7;
+            this.left_image.TabStop = false;
+            this.left_image.Click += new System.EventHandler(this.left_image_Click);
+            // 
+            // clear_left_image_button
+            // 
+            this.clear_left_image_button.Location = new System.Drawing.Point(12, 350);
+            this.clear_left_image_button.Name = "clear_left_image_button";
+            this.clear_left_image_button.Size = new System.Drawing.Size(81, 32);
+            this.clear_left_image_button.TabIndex = 8;
+            this.clear_left_image_button.Text = "Czyść";
+            this.clear_left_image_button.UseVisualStyleBackColor = true;
+            this.clear_left_image_button.Click += new System.EventHandler(this.clear_left_image_button_Click);
+            // 
+            // line_graph_left_image_button
+            // 
+            this.line_graph_left_image_button.Location = new System.Drawing.Point(251, 350);
+            this.line_graph_left_image_button.Name = "line_graph_left_image_button";
+            this.line_graph_left_image_button.Size = new System.Drawing.Size(81, 32);
+            this.line_graph_left_image_button.TabIndex = 9;
+            this.line_graph_left_image_button.Text = "Wykres linii";
+            this.line_graph_left_image_button.UseVisualStyleBackColor = true;
+            this.line_graph_left_image_button.Click += new System.EventHandler(this.line_graph_left_image_button_Click);
+            // 
+            // color_components_left_graph
+            // 
+            this.color_components_left_graph.BackColor = System.Drawing.Color.Black;
+            this.color_components_left_graph.Location = new System.Drawing.Point(13, 388);
+            this.color_components_left_graph.Name = "color_components_left_graph";
+            this.color_components_left_graph.Size = new System.Drawing.Size(320, 150);
+            this.color_components_left_graph.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.color_components_left_graph.TabIndex = 11;
+            this.color_components_left_graph.TabStop = false;
+            // 
+            // color_components_right_graph
+            // 
+            this.color_components_right_graph.BackColor = System.Drawing.Color.Black;
+            this.color_components_right_graph.Location = new System.Drawing.Point(426, 388);
+            this.color_components_right_graph.Name = "color_components_right_graph";
+            this.color_components_right_graph.Size = new System.Drawing.Size(320, 150);
+            this.color_components_right_graph.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.color_components_right_graph.TabIndex = 22;
+            this.color_components_right_graph.TabStop = false;
+            // 
+            // line_graph_right_image_button
+            // 
+            this.line_graph_right_image_button.Location = new System.Drawing.Point(664, 350);
+            this.line_graph_right_image_button.Name = "line_graph_right_image_button";
+            this.line_graph_right_image_button.Size = new System.Drawing.Size(81, 32);
+            this.line_graph_right_image_button.TabIndex = 21;
+            this.line_graph_right_image_button.Text = "Wykres linii";
+            this.line_graph_right_image_button.UseVisualStyleBackColor = true;
+            this.line_graph_right_image_button.Click += new System.EventHandler(this.line_graph_right_image_button_Click);
+            // 
+            // clear_right_image_button
+            // 
+            this.clear_right_image_button.Location = new System.Drawing.Point(425, 350);
+            this.clear_right_image_button.Name = "clear_right_image_button";
+            this.clear_right_image_button.Size = new System.Drawing.Size(81, 32);
+            this.clear_right_image_button.TabIndex = 20;
+            this.clear_right_image_button.Text = "Czyść";
+            this.clear_right_image_button.UseVisualStyleBackColor = true;
+            this.clear_right_image_button.Click += new System.EventHandler(this.clear_right_image_button_Click);
+            // 
+            // right_image
+            // 
+            this.right_image.BackColor = System.Drawing.Color.Black;
+            this.right_image.Location = new System.Drawing.Point(425, 104);
+            this.right_image.Name = "right_image";
+            this.right_image.Size = new System.Drawing.Size(320, 240);
+            this.right_image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.right_image.TabIndex = 19;
+            this.right_image.TabStop = false;
+            // 
+            // right_image_y_label
+            // 
+            this.right_image_y_label.AutoSize = true;
+            this.right_image_y_label.Location = new System.Drawing.Point(533, 84);
+            this.right_image_y_label.Name = "right_image_y_label";
+            this.right_image_y_label.Size = new System.Drawing.Size(12, 13);
+            this.right_image_y_label.TabIndex = 18;
+            this.right_image_y_label.Text = "y";
+            // 
+            // right_image_x_label
+            // 
+            this.right_image_x_label.AutoSize = true;
+            this.right_image_x_label.Location = new System.Drawing.Point(533, 57);
+            this.right_image_x_label.Name = "right_image_x_label";
+            this.right_image_x_label.Size = new System.Drawing.Size(12, 13);
+            this.right_image_x_label.TabIndex = 17;
+            this.right_image_x_label.Text = "x";
+            // 
+            // right_image_y_text_box
+            // 
+            this.right_image_y_text_box.Location = new System.Drawing.Point(426, 77);
+            this.right_image_y_text_box.Name = "right_image_y_text_box";
+            this.right_image_y_text_box.Size = new System.Drawing.Size(100, 20);
+            this.right_image_y_text_box.TabIndex = 16;
+            // 
+            // right_image_x_text_box
+            // 
+            this.right_image_x_text_box.Location = new System.Drawing.Point(426, 51);
+            this.right_image_x_text_box.Name = "right_image_x_text_box";
+            this.right_image_x_text_box.Size = new System.Drawing.Size(100, 20);
+            this.right_image_x_text_box.TabIndex = 15;
+            // 
+            // camera_right_button
+            // 
+            this.camera_right_button.Location = new System.Drawing.Point(599, 12);
+            this.camera_right_button.Name = "camera_right_button";
+            this.camera_right_button.Size = new System.Drawing.Size(81, 32);
+            this.camera_right_button.TabIndex = 14;
+            this.camera_right_button.Text = "Kamera";
+            this.camera_right_button.UseVisualStyleBackColor = true;
+            this.camera_right_button.Click += new System.EventHandler(this.camera_right_button_Click);
+            // 
+            // from_file_right_button
+            // 
+            this.from_file_right_button.Location = new System.Drawing.Point(512, 12);
+            this.from_file_right_button.Name = "from_file_right_button";
+            this.from_file_right_button.Size = new System.Drawing.Size(81, 32);
+            this.from_file_right_button.TabIndex = 13;
+            this.from_file_right_button.Text = "Z pliku";
+            this.from_file_right_button.UseVisualStyleBackColor = true;
+            this.from_file_right_button.Click += new System.EventHandler(this.from_file_right_button_Click);
+            // 
+            // image_right_button
+            // 
+            this.image_right_button.Location = new System.Drawing.Point(425, 12);
+            this.image_right_button.Name = "image_right_button";
+            this.image_right_button.Size = new System.Drawing.Size(81, 32);
+            this.image_right_button.TabIndex = 12;
+            this.image_right_button.Text = "Grafika";
+            this.image_right_button.UseVisualStyleBackColor = true;
+            this.image_right_button.Click += new System.EventHandler(this.image_right_button_Click);
+            // 
+            // color_listing_label
+            // 
+            this.color_listing_label.AutoSize = true;
+            this.color_listing_label.Location = new System.Drawing.Point(191, 61);
+            this.color_listing_label.Name = "color_listing_label";
+            this.color_listing_label.Size = new System.Drawing.Size(72, 13);
+            this.color_listing_label.TabIndex = 54;
+            this.color_listing_label.Text = "Listing koloru:";
+            // 
+            // blue_textbox
+            // 
+            this.blue_textbox.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.blue_textbox.Location = new System.Drawing.Point(267, 77);
+            this.blue_textbox.Name = "blue_textbox";
+            this.blue_textbox.Size = new System.Drawing.Size(36, 20);
+            this.blue_textbox.TabIndex = 53;
+            // 
+            // green_textbox
+            // 
+            this.green_textbox.BackColor = System.Drawing.Color.PaleGreen;
+            this.green_textbox.Location = new System.Drawing.Point(231, 77);
+            this.green_textbox.Name = "green_textbox";
+            this.green_textbox.Size = new System.Drawing.Size(36, 20);
+            this.green_textbox.TabIndex = 52;
+            // 
+            // red_textbox
+            // 
+            this.red_textbox.BackColor = System.Drawing.Color.Salmon;
+            this.red_textbox.Location = new System.Drawing.Point(194, 77);
+            this.red_textbox.Name = "red_textbox";
+            this.red_textbox.Size = new System.Drawing.Size(36, 20);
+            this.red_textbox.TabIndex = 51;
+            // 
+            // green_checkbox
+            // 
+            this.green_checkbox.AutoSize = true;
+            this.green_checkbox.BackColor = System.Drawing.Color.PaleGreen;
+            this.green_checkbox.Location = new System.Drawing.Point(338, 162);
+            this.green_checkbox.Name = "green_checkbox";
+            this.green_checkbox.Size = new System.Drawing.Size(34, 17);
+            this.green_checkbox.TabIndex = 60;
+            this.green_checkbox.Text = "G";
+            this.green_checkbox.UseVisualStyleBackColor = false;
+            // 
+            // blue_checkbox
+            // 
+            this.blue_checkbox.AutoSize = true;
+            this.blue_checkbox.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.blue_checkbox.Location = new System.Drawing.Point(338, 185);
+            this.blue_checkbox.Name = "blue_checkbox";
+            this.blue_checkbox.Size = new System.Drawing.Size(33, 17);
+            this.blue_checkbox.TabIndex = 59;
+            this.blue_checkbox.Text = "B";
+            this.blue_checkbox.UseVisualStyleBackColor = false;
+            // 
+            // red_checkbox
+            // 
+            this.red_checkbox.AutoSize = true;
+            this.red_checkbox.BackColor = System.Drawing.Color.Salmon;
+            this.red_checkbox.Location = new System.Drawing.Point(338, 139);
+            this.red_checkbox.Name = "red_checkbox";
+            this.red_checkbox.Size = new System.Drawing.Size(34, 17);
+            this.red_checkbox.TabIndex = 58;
+            this.red_checkbox.Text = "R";
+            this.red_checkbox.UseVisualStyleBackColor = false;
+            // 
+            // mono_copy_button
+            // 
+            this.mono_copy_button.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.mono_copy_button.Location = new System.Drawing.Point(338, 243);
+            this.mono_copy_button.Name = "mono_copy_button";
+            this.mono_copy_button.Size = new System.Drawing.Size(81, 29);
+            this.mono_copy_button.TabIndex = 57;
+            this.mono_copy_button.Text = "Mono →";
+            this.mono_copy_button.UseVisualStyleBackColor = true;
+            this.mono_copy_button.Click += new System.EventHandler(this.mono_copy_button_Click);
+            // 
+            // right2left_copy_button
+            // 
+            this.right2left_copy_button.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.right2left_copy_button.Location = new System.Drawing.Point(338, 208);
+            this.right2left_copy_button.Name = "right2left_copy_button";
+            this.right2left_copy_button.Size = new System.Drawing.Size(81, 29);
+            this.right2left_copy_button.TabIndex = 56;
+            this.right2left_copy_button.Text = "←";
+            this.right2left_copy_button.UseVisualStyleBackColor = true;
+            this.right2left_copy_button.Click += new System.EventHandler(this.right2left_copy_button_Click);
+            // 
+            // left2right_copy_button
+            // 
+            this.left2right_copy_button.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.left2right_copy_button.Location = new System.Drawing.Point(338, 104);
+            this.left2right_copy_button.Name = "left2right_copy_button";
+            this.left2right_copy_button.Size = new System.Drawing.Size(81, 29);
+            this.left2right_copy_button.TabIndex = 55;
+            this.left2right_copy_button.Text = "→";
+            this.left2right_copy_button.UseVisualStyleBackColor = true;
+            this.left2right_copy_button.Click += new System.EventHandler(this.left2right_copy_button_Click);
+            // 
+            // button_Simple_Movie
+            // 
+            this.button_Simple_Movie.Location = new System.Drawing.Point(338, 12);
+            this.button_Simple_Movie.Name = "button_Simple_Movie";
+            this.button_Simple_Movie.Size = new System.Drawing.Size(81, 32);
+            this.button_Simple_Movie.TabIndex = 61;
+            this.button_Simple_Movie.Text = "Prosty film";
+            this.button_Simple_Movie.UseVisualStyleBackColor = true;
+            this.button_Simple_Movie.Click += new System.EventHandler(this.button_Simple_Movie_Click);
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(766, 569);
+            this.Controls.Add(this.button_Simple_Movie);
+            this.Controls.Add(this.green_checkbox);
+            this.Controls.Add(this.blue_checkbox);
+            this.Controls.Add(this.red_checkbox);
+            this.Controls.Add(this.mono_copy_button);
+            this.Controls.Add(this.right2left_copy_button);
+            this.Controls.Add(this.left2right_copy_button);
+            this.Controls.Add(this.color_listing_label);
+            this.Controls.Add(this.blue_textbox);
+            this.Controls.Add(this.green_textbox);
+            this.Controls.Add(this.red_textbox);
+            this.Controls.Add(this.color_components_right_graph);
+            this.Controls.Add(this.line_graph_right_image_button);
+            this.Controls.Add(this.clear_right_image_button);
+            this.Controls.Add(this.right_image);
+            this.Controls.Add(this.right_image_y_label);
+            this.Controls.Add(this.right_image_x_label);
+            this.Controls.Add(this.right_image_y_text_box);
+            this.Controls.Add(this.right_image_x_text_box);
+            this.Controls.Add(this.camera_right_button);
+            this.Controls.Add(this.from_file_right_button);
+            this.Controls.Add(this.image_right_button);
+            this.Controls.Add(this.color_components_left_graph);
+            this.Controls.Add(this.line_graph_left_image_button);
+            this.Controls.Add(this.clear_left_image_button);
+            this.Controls.Add(this.left_image);
+            this.Controls.Add(this.left_image_y_label);
+            this.Controls.Add(this.left_image_x_label);
+            this.Controls.Add(this.left_image_y_text_box);
+            this.Controls.Add(this.left_image_x_text_box);
+            this.Controls.Add(this.camera_left_button);
+            this.Controls.Add(this.from_file_left_button);
+            this.Controls.Add(this.image_left_button);
+            this.Name = "Form1";
+            this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.left_image)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.color_components_left_graph)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.color_components_right_graph)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.right_image)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Button image_left_button;
+        private System.Windows.Forms.Button from_file_left_button;
+        private System.Windows.Forms.Button camera_left_button;
+        private System.Windows.Forms.TextBox left_image_x_text_box;
+        private System.Windows.Forms.TextBox left_image_y_text_box;
+        private System.Windows.Forms.Label left_image_x_label;
+        private System.Windows.Forms.Label left_image_y_label;
+        private System.Windows.Forms.PictureBox left_image;
+        private System.Windows.Forms.Button clear_left_image_button;
+        private System.Windows.Forms.Button line_graph_left_image_button;
+        private System.Windows.Forms.PictureBox color_components_left_graph;
+        private System.Windows.Forms.PictureBox color_components_right_graph;
+        private System.Windows.Forms.Button line_graph_right_image_button;
+        private System.Windows.Forms.Button clear_right_image_button;
+        private System.Windows.Forms.PictureBox right_image;
+        private System.Windows.Forms.Label right_image_y_label;
+        private System.Windows.Forms.Label right_image_x_label;
+        private System.Windows.Forms.TextBox right_image_y_text_box;
+        private System.Windows.Forms.TextBox right_image_x_text_box;
+        private System.Windows.Forms.Button camera_right_button;
+        private System.Windows.Forms.Button from_file_right_button;
+        private System.Windows.Forms.Button image_right_button;
+        private System.Windows.Forms.Label color_listing_label;
+        private System.Windows.Forms.TextBox blue_textbox;
+        private System.Windows.Forms.TextBox green_textbox;
+        private System.Windows.Forms.TextBox red_textbox;
+        private System.Windows.Forms.CheckBox green_checkbox;
+        private System.Windows.Forms.CheckBox blue_checkbox;
+        private System.Windows.Forms.CheckBox red_checkbox;
+        private System.Windows.Forms.Button mono_copy_button;
+        private System.Windows.Forms.Button right2left_copy_button;
+        private System.Windows.Forms.Button left2right_copy_button;
+        private System.Windows.Forms.Button button_Simple_Movie;
+    }
+}
+
