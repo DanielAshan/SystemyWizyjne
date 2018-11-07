@@ -54,7 +54,7 @@ namespace Kolor
             wykres_PB1 = new Image<Bgr, byte>(color_components_left_graph.Size);
             wykres_PB2 = new Image<Bgr, byte>(color_components_right_graph.Size);
 
-            //Blok try - catch. Jak nie ma kamery to pruba stworzenia obiektu VideoCapture może
+            //Blok try - catch. Jak nie ma kamery to próba stworzenia obiektu VideoCapture może
             //być nieudana. Z tego względu zastosujemy blok try catch, który w przypadku niepowodzenia
             //tej operacji przechwyci i wyświtli komunikat błędu, a program nie zakończy się nagle błędem
             //Blok try - catch jest elementem języka C# i nie pochodzi od EmguCV
@@ -90,7 +90,9 @@ namespace Kolor
 
             //UWAGA! Zadanie: Dopisać jeszcze jeden prostokąt (o innych wymiarach i kolorze niż obecny)
             //oraz dodać kółko i linie
-
+            CvInvoke.Rectangle(obraz_PB1, new Rectangle(250, 20, 50, 50), new MCvScalar(200, 140, 255), -1);
+            CvInvoke.Circle(obraz_PB1, new Point(160, 120), 30, new MCvScalar(100, 150, 200), -1);
+            CvInvoke.Line(obraz_PB1, new Point(50,200), new Point(270, 200), new MCvScalar(200, 150, 100), 4);
             //Wyświetlanie obrazu na pictureBoxie
             //PictureBox trzyma obrazy jako bitmapy co jest wspierane przez typ Image. 
             //Właściwość Bitmap jest odczytywana jak po nazwie zmiennej typu Image wpiszemy
@@ -110,13 +112,14 @@ namespace Kolor
             //Jedną z takich metod jest metoda do odczytywania obrazka z pliku czyli Imread;
             //Dlatego też posłużymy się pomocniczą zmienną typu Mat
             Mat temp = new Mat();
-            temp = CvInvoke.Imread(@"wkleić poprawną ścieżkę do pliku ");
+            temp = CvInvoke.Imread("./example.jpeg");
             //Obrazek moze mieć inny rozmiar od rozmiaru pictureboxa, dlatego dokonamy jego skalowania
             CvInvoke.Resize(temp, temp, left_image.Size);
             //Przypisawanie danych z Mat do Image<>
             obraz_PB1 = temp.ToImage<Bgr, byte>();
 
             //UWAGA! Zadanie: Na podstawie przycisku tworzącego grafikę, wyświetlić dane z obraz_PB1 na pictureboxie
+            left_image.Image = obraz_PB1.Bitmap;
         }
 
         private void camera_left_button_Click(object sender, EventArgs e)
@@ -130,24 +133,42 @@ namespace Kolor
 
             //UWAGA! Zadanie: Dopisać kopiowanie danych z mat do image i wyświetlić na
             //pictureboxie
+
+            obraz_PB1 = temp.ToImage<Bgr, byte>();
+            left_image.Image = obraz_PB1.Bitmap;
         }
 
         private void image_right_button_Click(object sender, EventArgs e)
         {
             //UWAGA! Zadanie Zaimplementować rysowanie grafiki dla pictureboxa2 analogicznie
             //do pictureboxa1
+
+            CvInvoke.Rectangle(obraz_PB2, new Rectangle(20, 20, 50, 50), new MCvScalar(255, 200, 140), -1);
+            CvInvoke.Rectangle(obraz_PB2, new Rectangle(250, 20, 50, 50), new MCvScalar(255, 200, 140), -1);
+            CvInvoke.Circle(obraz_PB2, new Point(160, 120), 30, new MCvScalar(200, 150, 100), -1);
+            CvInvoke.Line(obraz_PB2, new Point(50, 200), new Point(270, 200), new MCvScalar(100, 150, 200), 4);
+            right_image.Image = obraz_PB2.Bitmap;
         }
 
         private void from_file_right_button_Click(object sender, EventArgs e)
         {
             //UWAGA! Zadanie Zaimplementować wczytywanie obrazu z pliku dla pictureboxa2 analogicznie
             //do pictureboxa1
+            Mat temp = new Mat();
+            temp = CvInvoke.Imread("./example.jpeg");
+            CvInvoke.Resize(temp, temp, right_image.Size);
+            obraz_PB2 = temp.ToImage<Bgr, byte>();
+            right_image.Image = obraz_PB2.Bitmap;
         }
 
         private void camera_right_button_Click(object sender, EventArgs e)
         {
             //UWAGA! Zadanie Zaimplementować wczytywanie obrazu z kamery dla pictureboxa2 analogicznie
             //do pictureboxa1
+            Mat temp = kamera.QueryFrame();
+            CvInvoke.Resize(temp, temp, right_image.Size);
+            obraz_PB2 = temp.ToImage<Bgr, byte>();
+            right_image.Image = obraz_PB2.Bitmap;
         }
 
         private void clear_left_image_button_Click(object sender, EventArgs e)
@@ -155,12 +176,14 @@ namespace Kolor
             //Metoda SetZero ustawia wartość 0 w całym obrazie. Odpowiada to kolorowi czarnemu
             //i jest równoznaczne z wyczyszczeniem go
             obraz_PB1.SetZero();
-            left_image.Image = obraz_PB1.Bitmap;
+            left_image.Image = obraz_PB2.Bitmap;
         }
 
         private void clear_right_image_button_Click(object sender, EventArgs e)
         {
             //UWAGA! Zadanie - zaimplementować czyszczenia dla obrazka 2
+            obraz_PB2.SetZero();
+            right_image.Image = obraz_PB2.Bitmap;
         }
 
         private void Form1_Load(object sender, EventArgs e)

@@ -24,3 +24,4 @@ C:\projects\systemy_wizyjne\Kolor\Kolor\obj\x64\Debug\Kolor.csproj.CopyComplete
 C:\projects\systemy_wizyjne\Kolor\Kolor\obj\x64\Debug\Kolor.exe
 C:\projects\systemy_wizyjne\Kolor\Kolor\obj\x64\Debug\Kolor.pdb
 C:\projects\systemy_wizyjne\Kolor\Kolor\obj\x64\Debug\Kolor.Form1.resources
+C:\projects\systemy_wizyjne\Kolor\Kolor\bin\x64\Debug\example.jpeg
