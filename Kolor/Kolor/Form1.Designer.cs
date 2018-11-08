@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.image_left_button = new System.Windows.Forms.Button();
             this.from_file_left_button = new System.Windows.Forms.Button();
             this.camera_left_button = new System.Windows.Forms.Button();
@@ -65,6 +66,7 @@
             this.blue_textBox_right = new System.Windows.Forms.TextBox();
             this.green_textBox_right = new System.Windows.Forms.TextBox();
             this.red_textBox_right = new System.Windows.Forms.TextBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.left_image)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.color_components_left_graph)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.color_components_right_graph)).BeginInit();
@@ -419,6 +421,11 @@
             this.red_textBox_right.Size = new System.Drawing.Size(36, 20);
             this.red_textBox_right.TabIndex = 62;
             // 
+            // timer1
+            // 
+            this.timer1.Interval = 50;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -512,6 +519,7 @@
         private System.Windows.Forms.TextBox blue_textBox_right;
         private System.Windows.Forms.TextBox green_textBox_right;
         internal System.Windows.Forms.TextBox red_textBox_right;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

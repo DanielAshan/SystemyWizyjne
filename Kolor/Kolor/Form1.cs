@@ -44,6 +44,8 @@ namespace Kolor
         //Typ videocapture służyć nam będzie do łączenia się z kamerą
         VideoCapture kamera;
 
+        Boolean Movie;
+
         //Tzw. konstruktor. Odpowiada za zainicjalizowanie całego okienka programu
         public Form1()
         {
@@ -53,7 +55,7 @@ namespace Kolor
             obraz_PB2 = new Image<Bgr, byte>(right_image.Size);
             wykres_PB1 = new Image<Bgr, byte>(color_components_left_graph.Size);
             wykres_PB2 = new Image<Bgr, byte>(color_components_right_graph.Size);
-
+            Movie = false;
             //Blok try - catch. Jak nie ma kamery to próba stworzenia obiektu VideoCapture może
             //być nieudana. Z tego względu zastosujemy blok try catch, który w przypadku niepowodzenia
             //tej operacji przechwyci i wyświtli komunikat błędu, a program nie zakończy się nagle błędem
@@ -452,8 +454,57 @@ namespace Kolor
             //4) W obsłudze zdażenia Tick dodać kod odbierający obraz z kamery i wyrysować dla niego wykres
             //5) W tym celu należy implementację wykreślania linii skopiować do osobnej (własnoręcznie stworzonej) metody
             //która będzie wywoływana albo z przycisku albo z timera. Dzięki temu nie będzie nadmiernego kopiowania raz stworzonego kodu
+
+            Movie = !Movie;
+            if (Movie)
+            {
+                timer1.Start();
+                left_image_x_text_box.Text = "0";
+                left_image_y_text_box.Text = "0";
+            } else
+            {
+                timer1.Stop();
+            }
         }
 
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            Mat temp = kamera.QueryFrame();
+            CvInvoke.Resize(temp, temp, left_image.Size);
+            obraz_PB1 = temp.ToImage<Bgr, byte>();
+            left_image.Image = obraz_PB1.Bitmap;
+            rysujeLinie();
+        }
+
+        private void rysujeLinie()
+        {
+            wykres_PB1.SetZero();
+            byte[,,] temp_obraz = obraz_PB1.Data;
+            byte[,,] temp_wykres = wykres_PB1.Data;
+
+            int wybrana_linia = int.Parse(left_image_y_text_box.Text); //UWAGA! Zadanie - odczytać liczzbę z textboxa_Y
+            int wys_wykresu = color_components_left_graph.Height - 1; //"-1" aby nie przekraczać indeksów tablicy
+            double scale = wys_wykresu / 255.0;
+
+            byte B, G, R;
+
+            for (int x = 0; x < left_image.Width; x++)
+            {
+                B = temp_obraz[wybrana_linia, x, 0];
+                G = temp_obraz[wybrana_linia, x, 1];
+                R = temp_obraz[wybrana_linia, x, 2];
+                B = (byte)(wys_wykresu - (int)B * scale);
+                G = (byte)(wys_wykresu - (int)G * scale);
+                R = (byte)(wys_wykresu - (int)R * scale);
+
+                temp_wykres[B, x, 0] = 0xFF;
+                temp_wykres[G, x, 1] = 0xFF;
+                temp_wykres[R, x, 2] = 0xFF;
+
+            }
+            wykres_PB1.Data = temp_wykres;
+            color_components_left_graph.Image = wykres_PB1.Bitmap;
+        }
         #endregion 
     }
 }
