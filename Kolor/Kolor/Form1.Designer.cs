@@ -51,9 +51,9 @@
             this.from_file_right_button = new System.Windows.Forms.Button();
             this.image_right_button = new System.Windows.Forms.Button();
             this.color_listing_label = new System.Windows.Forms.Label();
-            this.blue_textbox = new System.Windows.Forms.TextBox();
-            this.green_textbox = new System.Windows.Forms.TextBox();
-            this.red_textbox = new System.Windows.Forms.TextBox();
+            this.blue_textbox_left = new System.Windows.Forms.TextBox();
+            this.green_textbox_left = new System.Windows.Forms.TextBox();
+            this.red_textbox_left = new System.Windows.Forms.TextBox();
             this.green_checkbox = new System.Windows.Forms.CheckBox();
             this.blue_checkbox = new System.Windows.Forms.CheckBox();
             this.red_checkbox = new System.Windows.Forms.CheckBox();
@@ -61,6 +61,10 @@
             this.right2left_copy_button = new System.Windows.Forms.Button();
             this.left2right_copy_button = new System.Windows.Forms.Button();
             this.button_Simple_Movie = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.blue_textBox_right = new System.Windows.Forms.TextBox();
+            this.green_textBox_right = new System.Windows.Forms.TextBox();
+            this.red_textBox_right = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.left_image)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.color_components_left_graph)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.color_components_right_graph)).BeginInit();
@@ -209,6 +213,7 @@
             this.right_image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.right_image.TabIndex = 19;
             this.right_image.TabStop = false;
+            this.right_image.Click += new System.EventHandler(this.right_image_Click);
             // 
             // right_image_y_label
             // 
@@ -281,29 +286,29 @@
             this.color_listing_label.TabIndex = 54;
             this.color_listing_label.Text = "Listing koloru:";
             // 
-            // blue_textbox
+            // blue_textbox_left
             // 
-            this.blue_textbox.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.blue_textbox.Location = new System.Drawing.Point(267, 77);
-            this.blue_textbox.Name = "blue_textbox";
-            this.blue_textbox.Size = new System.Drawing.Size(36, 20);
-            this.blue_textbox.TabIndex = 53;
+            this.blue_textbox_left.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.blue_textbox_left.Location = new System.Drawing.Point(267, 77);
+            this.blue_textbox_left.Name = "blue_textbox_left";
+            this.blue_textbox_left.Size = new System.Drawing.Size(36, 20);
+            this.blue_textbox_left.TabIndex = 53;
             // 
-            // green_textbox
+            // green_textbox_left
             // 
-            this.green_textbox.BackColor = System.Drawing.Color.PaleGreen;
-            this.green_textbox.Location = new System.Drawing.Point(231, 77);
-            this.green_textbox.Name = "green_textbox";
-            this.green_textbox.Size = new System.Drawing.Size(36, 20);
-            this.green_textbox.TabIndex = 52;
+            this.green_textbox_left.BackColor = System.Drawing.Color.PaleGreen;
+            this.green_textbox_left.Location = new System.Drawing.Point(231, 77);
+            this.green_textbox_left.Name = "green_textbox_left";
+            this.green_textbox_left.Size = new System.Drawing.Size(36, 20);
+            this.green_textbox_left.TabIndex = 52;
             // 
-            // red_textbox
+            // red_textbox_left
             // 
-            this.red_textbox.BackColor = System.Drawing.Color.Salmon;
-            this.red_textbox.Location = new System.Drawing.Point(194, 77);
-            this.red_textbox.Name = "red_textbox";
-            this.red_textbox.Size = new System.Drawing.Size(36, 20);
-            this.red_textbox.TabIndex = 51;
+            this.red_textbox_left.BackColor = System.Drawing.Color.Salmon;
+            this.red_textbox_left.Location = new System.Drawing.Point(194, 77);
+            this.red_textbox_left.Name = "red_textbox_left";
+            this.red_textbox_left.Size = new System.Drawing.Size(36, 20);
+            this.red_textbox_left.TabIndex = 51;
             // 
             // green_checkbox
             // 
@@ -381,11 +386,48 @@
             this.button_Simple_Movie.UseVisualStyleBackColor = true;
             this.button_Simple_Movie.Click += new System.EventHandler(this.button_Simple_Movie_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(608, 61);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(72, 13);
+            this.label1.TabIndex = 65;
+            this.label1.Text = "Listing koloru:";
+            // 
+            // blue_textBox_right
+            // 
+            this.blue_textBox_right.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.blue_textBox_right.Location = new System.Drawing.Point(684, 77);
+            this.blue_textBox_right.Name = "blue_textBox_right";
+            this.blue_textBox_right.Size = new System.Drawing.Size(36, 20);
+            this.blue_textBox_right.TabIndex = 64;
+            // 
+            // green_textBox_right
+            // 
+            this.green_textBox_right.BackColor = System.Drawing.Color.PaleGreen;
+            this.green_textBox_right.Location = new System.Drawing.Point(648, 77);
+            this.green_textBox_right.Name = "green_textBox_right";
+            this.green_textBox_right.Size = new System.Drawing.Size(36, 20);
+            this.green_textBox_right.TabIndex = 63;
+            // 
+            // red_textBox_right
+            // 
+            this.red_textBox_right.BackColor = System.Drawing.Color.Salmon;
+            this.red_textBox_right.Location = new System.Drawing.Point(611, 77);
+            this.red_textBox_right.Name = "red_textBox_right";
+            this.red_textBox_right.Size = new System.Drawing.Size(36, 20);
+            this.red_textBox_right.TabIndex = 62;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(766, 569);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.blue_textBox_right);
+            this.Controls.Add(this.green_textBox_right);
+            this.Controls.Add(this.red_textBox_right);
             this.Controls.Add(this.button_Simple_Movie);
             this.Controls.Add(this.green_checkbox);
             this.Controls.Add(this.blue_checkbox);
@@ -394,9 +436,9 @@
             this.Controls.Add(this.right2left_copy_button);
             this.Controls.Add(this.left2right_copy_button);
             this.Controls.Add(this.color_listing_label);
-            this.Controls.Add(this.blue_textbox);
-            this.Controls.Add(this.green_textbox);
-            this.Controls.Add(this.red_textbox);
+            this.Controls.Add(this.blue_textbox_left);
+            this.Controls.Add(this.green_textbox_left);
+            this.Controls.Add(this.red_textbox_left);
             this.Controls.Add(this.color_components_right_graph);
             this.Controls.Add(this.line_graph_right_image_button);
             this.Controls.Add(this.clear_right_image_button);
@@ -420,7 +462,7 @@
             this.Controls.Add(this.from_file_left_button);
             this.Controls.Add(this.image_left_button);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = " ";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.left_image)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.color_components_left_graph)).EndInit();
@@ -456,9 +498,8 @@
         private System.Windows.Forms.Button from_file_right_button;
         private System.Windows.Forms.Button image_right_button;
         private System.Windows.Forms.Label color_listing_label;
-        private System.Windows.Forms.TextBox blue_textbox;
-        private System.Windows.Forms.TextBox green_textbox;
-        private System.Windows.Forms.TextBox red_textbox;
+        private System.Windows.Forms.TextBox blue_textbox_left;
+        private System.Windows.Forms.TextBox green_textbox_left;
         private System.Windows.Forms.CheckBox green_checkbox;
         private System.Windows.Forms.CheckBox blue_checkbox;
         private System.Windows.Forms.CheckBox red_checkbox;
@@ -466,6 +507,11 @@
         private System.Windows.Forms.Button right2left_copy_button;
         private System.Windows.Forms.Button left2right_copy_button;
         private System.Windows.Forms.Button button_Simple_Movie;
+        internal System.Windows.Forms.TextBox red_textbox_left;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox blue_textBox_right;
+        private System.Windows.Forms.TextBox green_textBox_right;
+        internal System.Windows.Forms.TextBox red_textBox_right;
     }
 }
 

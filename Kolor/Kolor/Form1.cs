@@ -213,7 +213,9 @@ namespace Kolor
             MouseEventArgs me = e as MouseEventArgs;
 
             left_image_x_text_box.Text = me.X.ToString();
+
             //UWAGA! Zadanie - uzupełnić dla "Y"
+            left_image_y_text_box.Text = me.Y.ToString();
 
             //Listing koloru
             //Typ Image<Bgr, byte> przechowuje wewnętrznie dane obrazu jako tablice trójwymiarową
@@ -230,9 +232,22 @@ namespace Kolor
             //sformatowany szesnastkowo np FF zamiast 255
             //Formatowanie to nie doda natomiast wygodnego dla użytkownika przedrostka "0x", który
             //informuje uytkownika, że ma do czynienia z tekstem szesnastkowym
-            blue_textbox.Text = "0x" + temp1[me.Y, me.X, 0].ToString("X");
+            blue_textbox_left.Text = "0x" + temp1[me.Y, me.X, 0].ToString("X");
+            green_textbox_left.Text = "0x" + temp1[me.Y, me.X, 1].ToString("X");
+            red_textbox_left.Text = "0x" + temp1[me.Y, me.X, 2].ToString("X");
             //UWAGA! Zadanie - uzupełnić dla pozostałych składowych
             //UWAGA! Zadanie - sprawdzić poprawność przypysania liczb do textboxów testując program w działaniu
+        }
+
+        private void right_image_Click(object sender, EventArgs e)
+        {
+            MouseEventArgs me = e as MouseEventArgs;
+            right_image_x_text_box.Text = me.X.ToString();
+            right_image_y_text_box.Text = me.Y.ToString();
+            byte[,,] temp1 = obraz_PB1.Data;
+            blue_textBox_right.Text = "0x" + temp1[me.Y, me.X, 0].ToString("X");
+            green_textBox_right.Text = "0x" + temp1[me.Y, me.X, 1].ToString("X");
+            red_textBox_right.Text = "0x" + temp1[me.Y, me.X, 2].ToString("X");
         }
 
         //UWAGA! Zadanie Skopiować textboxy od współrzędnych kliknięcia i listingu koloru,
@@ -258,18 +273,45 @@ namespace Kolor
                 for (int y = 0; y < left_image.Height; y++)
                 {
                     temp2[y, x, 0] = (byte)(temp1[y, x, 0] & maska_B);
+                    temp2[y, x, 1] = (byte)(temp1[y, x, 1] & maska_G);
+                    temp2[y, x, 2] = (byte)(temp1[y, x, 2] & maska_R);
+
                     //UWAGA! zadanie - dokończyć zapis dla pozostałych kanałów koloru
                 }
             }
 
             obraz_PB2.Data = temp2;
+            right_image.Image = obraz_PB2.Bitmap;
             //UWAGA! zadanie - poprawnie wyświetlić dane na pictureboxie2
         }
 
         private void right2left_copy_button_Click(object sender, EventArgs e)
         {
             //Uwaga zadanie - zaimplementować operację kopiowanie wybranych kanałów koloru z prawej na lewą
+            byte maska_B, maska_G, maska_R;
+            maska_B = maska_G = maska_R = 0;
 
+            if (blue_checkbox.Checked) maska_B = 0xFF;
+            if (green_checkbox.Checked) maska_G = 0xFF;
+            if (red_checkbox.Checked) maska_R = 0xFF;
+
+            byte[,,] temp1 = obraz_PB1.Data;
+            byte[,,] temp2 = obraz_PB2.Data;
+
+            for (int x = 0; x < left_image.Width; x++)
+            {
+                for (int y = 0; y < left_image.Height; y++)
+                {
+                    temp1[y, x, 0] = (byte)(temp2[y, x, 0] & maska_B);
+                    temp1[y, x, 1] = (byte)(temp2[y, x, 1] & maska_G);
+                    temp1[y, x, 2] = (byte)(temp2[y, x, 2] & maska_R);
+
+                    //UWAGA! zadanie - dokończyć zapis dla pozostałych kanałów koloru
+                }
+            }
+
+            obraz_PB1.Data = temp1;
+            left_image.Image = obraz_PB1.Bitmap;
         }
 
         private void mono_copy_button_Click(object sender, EventArgs e)
@@ -281,6 +323,31 @@ namespace Kolor
             //(Dla każdego piksela osobno): mono = (R + G + B) / 3;
             //Maski nie będą potrzebne
             int mono;
+            byte maska_B, maska_G, maska_R;
+            maska_B = maska_G = maska_R = 0;
+
+            if (blue_checkbox.Checked) maska_B = 0xFF;
+            if (green_checkbox.Checked) maska_G = 0xFF;
+            if (red_checkbox.Checked) maska_R = 0xFF;
+
+            byte[,,] temp1 = obraz_PB1.Data;
+            byte[,,] temp2 = obraz_PB2.Data;
+
+            for (int x = 0; x < left_image.Width; x++)
+            {
+                for (int y = 0; y < left_image.Height; y++)
+                {
+                    mono = ((int)temp1[y, x, 0] + (int)temp1[y, x, 1] + (int)temp1[y, x, 2]) / 3;
+                    temp2[y, x, 0] = (byte)mono;
+                    temp2[y, x, 1] = (byte)mono;
+                    temp2[y, x, 2] = (byte)mono;
+
+                    //UWAGA! zadanie - dokończyć zapis dla pozostałych kanałów koloru
+                }
+            }
+
+            obraz_PB2.Data = temp2;
+            right_image.Image = obraz_PB2.Bitmap;
         }
 
         #endregion
