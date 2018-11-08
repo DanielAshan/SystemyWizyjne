@@ -39,7 +39,7 @@ namespace Kolor
         //pictureBox1 i pictureBox2
         //Deklaracja zmiennych przechowujących obrazy
         //Zmienne jedynie zadeklarowane muszą zostać jeszcze utworzone
-        Image<Bgr, byte> obraz_PB1, obraz_PB2, wykres_PB1, wykres_PB2;
+        Image<Bgr, byte> obraz_PB1, obraz_PB2, wykres_PB1, wykres_PB2, lut_image_var;
 
         //Typ videocapture służyć nam będzie do łączenia się z kamerą
         VideoCapture kamera;
@@ -47,8 +47,15 @@ namespace Kolor
         Boolean Movie;
 
         enum Operations { tozsamosc, negatyw, jasnosc, progowanie1, progowanie2, kontrast}
+        enum Zoom { IN, OUT };
+        enum Quarter { First, Second, Third, Fourth}
 
         Operations operacja;
+
+        Zoom zoom;
+        Boolean zoom_enabled;
+
+        Quarter quarter;
 
         byte[] LUT= new byte[256];
 
@@ -59,11 +66,14 @@ namespace Kolor
             //Tworzenie obiektów.
             obraz_PB1 = new Image<Bgr, byte>(left_image.Size);
             obraz_PB2 = new Image<Bgr, byte>(right_image.Size);
+            lut_image_var = new Image<Bgr, byte>(lut_image.Size);
             wykres_PB1 = new Image<Bgr, byte>(color_components_left_graph.Size);
             wykres_PB2 = new Image<Bgr, byte>(color_components_right_graph.Size);
             Movie = false;
             operacja = Operations.tozsamosc;
-            tozsamosc_radioButton.Select();
+            tozsamosc_radioButton.Checked = true;
+            zoom = Zoom.IN;
+            zoom_enabled = false;
             left_image_x_text_box.Text = "0";
             left_image_y_text_box.Text = "0";
             right_image_x_text_box.Text = "0";
@@ -114,6 +124,8 @@ namespace Kolor
             //Właściwość Bitmap jest odczytywana jak po nazwie zmiennej typu Image wpiszemy
             //kropkę i następnie wpiszemy bądź wybierzemy z pomosy Intelisense frazę "Bitmap"
             left_image.Image = obraz_PB1.Bitmap;
+
+
         }
 
         private void from_file_left_button_Click(object sender, EventArgs e)
@@ -253,6 +265,28 @@ namespace Kolor
             red_textbox_left.Text = "0x" + temp1[me.Y, me.X, 2].ToString("X");
             //UWAGA! Zadanie - uzupełnić dla pozostałych składowych
             //UWAGA! Zadanie - sprawdzić poprawność przypysania liczb do textboxów testując program w działaniu
+
+            if(zoom_enabled)
+            {
+                if(me.X <= 160 && me.Y <= 120)
+                {
+                    quarter = Quarter.Second;
+                }
+                else if(me.X > 160 && me.Y <= 120)
+                {
+                    quarter = Quarter.First;
+                }
+                else if (me.X <= 160 && me.Y > 120)
+                {
+                    quarter = Quarter.Third;
+                }
+                else if (me.X > 160 && me.Y > 120)
+                {
+                    quarter = Quarter.Fourth;
+                }
+
+                performZoom();
+            }
         }
 
         private void right_image_Click(object sender, EventArgs e)
@@ -339,13 +373,6 @@ namespace Kolor
             //(Dla każdego piksela osobno): mono = (R + G + B) / 3;
             //Maski nie będą potrzebne
             int mono;
-            byte maska_B, maska_G, maska_R;
-            maska_B = maska_G = maska_R = 0;
-
-            if (blue_checkbox.Checked) maska_B = 0xFF;
-            if (green_checkbox.Checked) maska_G = 0xFF;
-            if (red_checkbox.Checked) maska_R = 0xFF;
-
             byte[,,] temp1 = obraz_PB1.Data;
             byte[,,] temp2 = obraz_PB2.Data;
 
@@ -558,10 +585,38 @@ namespace Kolor
             operacja = new_operation;
         }
 
+        private void zoom_in_radioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            changeZoom(Zoom.IN);
+        }
+
+        private void zoom_out_radioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            changeZoom(Zoom.OUT);
+        }
+
+        private void changeZoom(Zoom new_zoom)
+        {
+            zoom = new_zoom;
+        }
+
         private void lut_button_Click(object sender, EventArgs e)
         {
             generateLUT();
             performOperation();
+            lutImage();
+        }
+
+        private void zoom_button_Click(object sender, EventArgs e)
+        {
+            zoom_enabled = !zoom_enabled;
+            if (zoom_enabled)
+            {
+                zoom_enabled_radioButton.Checked = true;           
+            } else
+            {
+                zoom_enabled_radioButton.Checked = false;
+            }
         }
 
         private void generateLUT()
@@ -677,5 +732,97 @@ namespace Kolor
             right_image.Image = obraz_PB2.Bitmap;
         }
 
+        private void performZoom()
+        {
+            byte[,,] temp1 = obraz_PB1.Data;
+            byte[,,] temp2 = obraz_PB2.Data;
+
+            int x_offset = 0;
+            int y_offset = 0;
+            switch (quarter)
+            {
+                case Quarter.First:
+                    x_offset = 160;
+                    y_offset = 0;
+                    break;
+                case Quarter.Second:
+                    x_offset = 0;
+                    y_offset = 0;
+                    break;
+                case Quarter.Third:
+                    x_offset = 0;
+                    y_offset = 120;
+                    break;
+                case Quarter.Fourth:
+                    x_offset = 160;
+                    y_offset = 120;
+                    break;
+                default:
+                    break;
+            }
+            switch (zoom)
+            {
+                case Zoom.IN:
+                    for (int x = 0; x < 160; x++)
+                    {
+                        for (int y = 0; y < 120; y++)
+                        {
+                            temp2[2*y, 2*x, 0] = temp1[y + y_offset, x + x_offset, 0];
+                            temp2[2 * y, 2*x, 1] = temp1[y + y_offset, x + x_offset, 1];
+                            temp2[2 * y, 2*x, 2] = temp1[y + y_offset, x + x_offset, 2];
+                            temp2[2 * y, 2*x+1, 0] = temp1[y + y_offset, x + x_offset, 0];
+                            temp2[2 * y, 2*x+1, 1] = temp1[y + y_offset, x + x_offset, 1];
+                            temp2[2 * y, 2*x+1, 2] = temp1[y + y_offset, x + x_offset, 2];
+                            temp2[2 * y + 1, 2 * x, 0] = temp1[y + y_offset, x + x_offset, 0];
+                            temp2[2 * y + 1, 2 * x, 1] = temp1[y + y_offset, x + x_offset, 1];
+                            temp2[2 * y + 1, 2 * x, 2] = temp1[y + y_offset, x + x_offset, 2];
+                            temp2[2 * y + 1, 2 * x + 1, 0] = temp1[y + y_offset, x + x_offset, 0];
+                            temp2[2 * y + 1, 2 * x + 1, 1] = temp1[y + y_offset, x + x_offset, 1];
+                            temp2[2 * y + 1, 2 * x + 1, 2] = temp1[y + y_offset, x + x_offset, 2];
+                        }
+                    }
+                    break;
+                case Zoom.OUT:
+                    for (int x = 0; x < 160; x++)
+                    {
+                        for (int y = 0; y < 120; y++)
+                        {
+                            int blue_component = ((int)temp1[2 * y, 2 * x, 0] + (int)temp1[2 * y, 2 * x + 1, 0] + (int)temp1[2 * y + 1, 2 * x, 0] + (int)temp1[2 * y + 1, 2 * x + 1, 0]) / 4;
+                            int green_component = ((int)temp1[2 * y, 2 * x, 1] + (int)temp1[2 * y, 2 * x + 1, 1] + (int)temp1[2 * y + 1, 2 * x, 1] + (int)temp1[2 * y + 1, 2 * x + 1, 1]) / 4;
+                            int red_component = ((int)temp1[2 * y, 2 * x, 2] + (int)temp1[2 * y, 2 * x + 1, 2] + (int)temp1[2 * y + 1, 2 * x, 2] + (int)temp1[2 * y + 1, 2 * x + 1, 2]) / 4;
+                            temp2[y, x, 0] = (byte)blue_component;
+                            temp2[y, x, 1] = (byte)green_component;
+                            temp2[y, x, 2] = (byte)red_component;
+
+                        }
+                    }
+                    break;
+                default:
+                    break;
+            }        
+            
+
+            obraz_PB2.Data = temp2;
+            right_image.Image = obraz_PB2.Bitmap;
+        }
+
+        private void lutImage()
+        {
+            double scale;
+            lut_image_var.SetValue(new Bgr(255, 255, 255));
+            byte[,,] temp_lut = lut_image_var.Data;
+            scale = (lut_image.Height - 1) / 255.0;
+            
+            for(int x = 0; x < LUT.Length; x++)
+            {
+                temp_lut[(int)(LUT[x] * scale), (int)((255 - x) * scale), 0] = 0;
+                temp_lut[(int)(LUT[x] * scale), (int)((255 - x) * scale), 1] = 0;
+                temp_lut[(int)(LUT[x] * scale), (int)((255 - x) * scale), 2] = 0;
+            }
+
+
+            lut_image_var.Data = temp_lut;
+            lut_image.Image = lut_image_var.Bitmap;
+        }
     }
 }

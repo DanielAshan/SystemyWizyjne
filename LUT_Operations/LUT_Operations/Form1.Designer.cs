@@ -78,10 +78,20 @@
             this.label3 = new System.Windows.Forms.Label();
             this.prog2_text_box = new System.Windows.Forms.TextBox();
             this.prog1_text_box = new System.Windows.Forms.TextBox();
+            this.zoom_in_radioButton = new System.Windows.Forms.RadioButton();
+            this.zoom_out_radioButton = new System.Windows.Forms.RadioButton();
+            this.zoom_button = new System.Windows.Forms.Button();
+            this.zoom_enabled_radioButton = new System.Windows.Forms.RadioButton();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.lut_image = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.left_image)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.color_components_left_graph)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.color_components_right_graph)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.right_image)).BeginInit();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lut_image)).BeginInit();
             this.SuspendLayout();
             // 
             // image_left_button
@@ -450,7 +460,7 @@
             // tozsamosc_radioButton
             // 
             this.tozsamosc_radioButton.AutoSize = true;
-            this.tozsamosc_radioButton.Location = new System.Drawing.Point(751, 104);
+            this.tozsamosc_radioButton.Location = new System.Drawing.Point(3, 3);
             this.tozsamosc_radioButton.Name = "tozsamosc_radioButton";
             this.tozsamosc_radioButton.Size = new System.Drawing.Size(79, 17);
             this.tozsamosc_radioButton.TabIndex = 67;
@@ -462,7 +472,7 @@
             // negatyw_radioButton
             // 
             this.negatyw_radioButton.AutoSize = true;
-            this.negatyw_radioButton.Location = new System.Drawing.Point(751, 127);
+            this.negatyw_radioButton.Location = new System.Drawing.Point(3, 26);
             this.negatyw_radioButton.Name = "negatyw_radioButton";
             this.negatyw_radioButton.Size = new System.Drawing.Size(67, 17);
             this.negatyw_radioButton.TabIndex = 68;
@@ -474,7 +484,7 @@
             // jasnosc_radioButton
             // 
             this.jasnosc_radioButton.AutoSize = true;
-            this.jasnosc_radioButton.Location = new System.Drawing.Point(751, 150);
+            this.jasnosc_radioButton.Location = new System.Drawing.Point(3, 49);
             this.jasnosc_radioButton.Name = "jasnosc_radioButton";
             this.jasnosc_radioButton.Size = new System.Drawing.Size(64, 17);
             this.jasnosc_radioButton.TabIndex = 69;
@@ -486,7 +496,7 @@
             // progowanie1_radioButton
             // 
             this.progowanie1_radioButton.AutoSize = true;
-            this.progowanie1_radioButton.Location = new System.Drawing.Point(751, 173);
+            this.progowanie1_radioButton.Location = new System.Drawing.Point(3, 72);
             this.progowanie1_radioButton.Name = "progowanie1_radioButton";
             this.progowanie1_radioButton.Size = new System.Drawing.Size(163, 17);
             this.progowanie1_radioButton.TabIndex = 70;
@@ -498,7 +508,7 @@
             // progowanie2_radioButton
             // 
             this.progowanie2_radioButton.AutoSize = true;
-            this.progowanie2_radioButton.Location = new System.Drawing.Point(751, 196);
+            this.progowanie2_radioButton.Location = new System.Drawing.Point(3, 95);
             this.progowanie2_radioButton.Name = "progowanie2_radioButton";
             this.progowanie2_radioButton.Size = new System.Drawing.Size(157, 17);
             this.progowanie2_radioButton.TabIndex = 71;
@@ -510,7 +520,7 @@
             // Kontrast
             // 
             this.Kontrast.AutoSize = true;
-            this.Kontrast.Location = new System.Drawing.Point(751, 220);
+            this.Kontrast.Location = new System.Drawing.Point(3, 119);
             this.Kontrast.Name = "Kontrast";
             this.Kontrast.Size = new System.Drawing.Size(64, 17);
             this.Kontrast.TabIndex = 72;
@@ -551,21 +561,97 @@
             this.prog1_text_box.Size = new System.Drawing.Size(100, 20);
             this.prog1_text_box.TabIndex = 73;
             // 
+            // zoom_in_radioButton
+            // 
+            this.zoom_in_radioButton.AutoSize = true;
+            this.zoom_in_radioButton.Location = new System.Drawing.Point(3, 7);
+            this.zoom_in_radioButton.Name = "zoom_in_radioButton";
+            this.zoom_in_radioButton.Size = new System.Drawing.Size(61, 17);
+            this.zoom_in_radioButton.TabIndex = 77;
+            this.zoom_in_radioButton.TabStop = true;
+            this.zoom_in_radioButton.Text = "ZoomIn";
+            this.zoom_in_radioButton.UseVisualStyleBackColor = true;
+            this.zoom_in_radioButton.CheckedChanged += new System.EventHandler(this.zoom_in_radioButton_CheckedChanged);
+            // 
+            // zoom_out_radioButton
+            // 
+            this.zoom_out_radioButton.AutoSize = true;
+            this.zoom_out_radioButton.Location = new System.Drawing.Point(3, 30);
+            this.zoom_out_radioButton.Name = "zoom_out_radioButton";
+            this.zoom_out_radioButton.Size = new System.Drawing.Size(69, 17);
+            this.zoom_out_radioButton.TabIndex = 78;
+            this.zoom_out_radioButton.TabStop = true;
+            this.zoom_out_radioButton.Text = "ZoomOut";
+            this.zoom_out_radioButton.UseVisualStyleBackColor = true;
+            this.zoom_out_radioButton.CheckedChanged += new System.EventHandler(this.zoom_out_radioButton_CheckedChanged);
+            // 
+            // zoom_button
+            // 
+            this.zoom_button.Location = new System.Drawing.Point(861, 12);
+            this.zoom_button.Name = "zoom_button";
+            this.zoom_button.Size = new System.Drawing.Size(91, 58);
+            this.zoom_button.TabIndex = 79;
+            this.zoom_button.Text = "ZOOM";
+            this.zoom_button.UseVisualStyleBackColor = true;
+            this.zoom_button.Click += new System.EventHandler(this.zoom_button_Click);
+            // 
+            // zoom_enabled_radioButton
+            // 
+            this.zoom_enabled_radioButton.AutoSize = true;
+            this.zoom_enabled_radioButton.Location = new System.Drawing.Point(859, 295);
+            this.zoom_enabled_radioButton.Name = "zoom_enabled_radioButton";
+            this.zoom_enabled_radioButton.Size = new System.Drawing.Size(110, 17);
+            this.zoom_enabled_radioButton.TabIndex = 80;
+            this.zoom_enabled_radioButton.TabStop = true;
+            this.zoom_enabled_radioButton.Text = "ZOOM ENABLED";
+            this.zoom_enabled_radioButton.UseVisualStyleBackColor = true;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.tozsamosc_radioButton);
+            this.panel1.Controls.Add(this.negatyw_radioButton);
+            this.panel1.Controls.Add(this.jasnosc_radioButton);
+            this.panel1.Controls.Add(this.progowanie1_radioButton);
+            this.panel1.Controls.Add(this.progowanie2_radioButton);
+            this.panel1.Controls.Add(this.Kontrast);
+            this.panel1.Location = new System.Drawing.Point(751, 94);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(193, 143);
+            this.panel1.TabIndex = 81;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.zoom_out_radioButton);
+            this.panel2.Controls.Add(this.zoom_in_radioButton);
+            this.panel2.Location = new System.Drawing.Point(751, 295);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(102, 71);
+            this.panel2.TabIndex = 82;
+            // 
+            // lut_image
+            // 
+            this.lut_image.BackColor = System.Drawing.Color.White;
+            this.lut_image.Location = new System.Drawing.Point(751, 388);
+            this.lut_image.Name = "lut_image";
+            this.lut_image.Size = new System.Drawing.Size(100, 100);
+            this.lut_image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.lut_image.TabIndex = 83;
+            this.lut_image.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(992, 569);
+            this.Controls.Add(this.lut_image);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.zoom_enabled_radioButton);
+            this.Controls.Add(this.zoom_button);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.prog2_text_box);
             this.Controls.Add(this.prog1_text_box);
-            this.Controls.Add(this.Kontrast);
-            this.Controls.Add(this.progowanie2_radioButton);
-            this.Controls.Add(this.progowanie1_radioButton);
-            this.Controls.Add(this.jasnosc_radioButton);
-            this.Controls.Add(this.negatyw_radioButton);
-            this.Controls.Add(this.tozsamosc_radioButton);
             this.Controls.Add(this.lut_button);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.blue_textBox_right);
@@ -611,6 +697,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.color_components_left_graph)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.color_components_right_graph)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.right_image)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lut_image)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -667,6 +758,13 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox prog2_text_box;
         private System.Windows.Forms.TextBox prog1_text_box;
+        private System.Windows.Forms.RadioButton zoom_in_radioButton;
+        private System.Windows.Forms.RadioButton zoom_out_radioButton;
+        private System.Windows.Forms.Button zoom_button;
+        private System.Windows.Forms.RadioButton zoom_enabled_radioButton;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.PictureBox lut_image;
     }
 }
 
