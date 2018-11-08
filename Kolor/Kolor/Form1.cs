@@ -372,7 +372,7 @@ namespace Kolor
             byte[,,] temp_obraz = obraz_PB1.Data;
             byte[,,] temp_wykres = wykres_PB1.Data;
 
-            int wybrana_linia = 0; //UWAGA! Zadanie - odczytać liczzbę z textboxa_Y
+            int wybrana_linia = int.Parse(left_image_y_text_box.Text); //UWAGA! Zadanie - odczytać liczzbę z textboxa_Y
             int wys_wykresu = color_components_left_graph.Height - 1; //"-1" aby nie przekraczać indeksów tablicy
             double scale = wys_wykresu / 255.0;
 
@@ -386,12 +386,19 @@ namespace Kolor
 
                 //UWAGA! Zadanie - dokończyć implementację pętli. Dokonać skalowania i odwrócenia
                 //wartości odczytanych i namalować je na wykresie
-
+                B = (byte)(wys_wykresu - (int)B * scale);
+                G = (byte)(wys_wykresu - (int)G * scale);
+                R = (byte)(wys_wykresu - (int)R * scale);
                 //Składowa = (byte)(wysokosc - Składowa * współczynnik_skalujący)
 
+                temp_wykres[B, x, 0] = 0xFF;
+                temp_wykres[G, x, 1] = 0xFF;
+                temp_wykres[R, x, 2] = 0xFF;
                 //temp_wykres[przeskalowana_i_odwrocona_skladowa, x, kanal_danej_skladowej] = 0xFF;
 
             }
+            wykres_PB1.Data = temp_wykres;
+            color_components_left_graph.Image = wykres_PB1.Bitmap;
             //UWAGA! Zadanie - wyświetlić dane na wykresie
         }
 
@@ -400,6 +407,38 @@ namespace Kolor
             //UWAGA! Zadanie - Analogicznie do linii dla obrazka 1 powtórzyć operację dla obrazka2.
             //UWAGA - współrzędną Y określającą wybraną linię pobrać z dokładnie tego samego miejsca
             //co dla obrazka 1
+
+            wykres_PB2.SetZero();
+            byte[,,] temp_obraz = obraz_PB2.Data;
+            byte[,,] temp_wykres = wykres_PB2.Data;
+
+            int wybrana_linia = int.Parse(right_image_y_text_box.Text); //UWAGA! Zadanie - odczytać liczzbę z textboxa_Y
+            int wys_wykresu = color_components_right_graph.Height - 1; //"-1" aby nie przekraczać indeksów tablicy
+            double scale = wys_wykresu / 255.0;
+
+            byte B, G, R;
+
+            for (int x = 0; x < left_image.Width; x++)
+            {
+                B = temp_obraz[wybrana_linia, x, 0];
+                G = temp_obraz[wybrana_linia, x, 1];
+                R = temp_obraz[wybrana_linia, x, 2];
+
+                //UWAGA! Zadanie - dokończyć implementację pętli. Dokonać skalowania i odwrócenia
+                //wartości odczytanych i namalować je na wykresie
+                B = (byte)(wys_wykresu - (int)B * scale);
+                G = (byte)(wys_wykresu - (int)G * scale);
+                R = (byte)(wys_wykresu - (int)R * scale);
+                //Składowa = (byte)(wysokosc - Składowa * współczynnik_skalujący)
+
+                temp_wykres[B, x, 0] = 0xFF;
+                temp_wykres[G, x, 1] = 0xFF;
+                temp_wykres[R, x, 2] = 0xFF;
+                //temp_wykres[przeskalowana_i_odwrocona_skladowa, x, kanal_danej_skladowej] = 0xFF;
+
+            }
+            wykres_PB2.Data = temp_wykres;
+            color_components_right_graph.Image = wykres_PB2.Bitmap;
         }
 
         private void button_Simple_Movie_Click(object sender, EventArgs e)
