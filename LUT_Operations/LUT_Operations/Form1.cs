@@ -548,7 +548,9 @@ namespace Kolor
             wykres_PB1.Data = temp_wykres;
             color_components_left_graph.Image = wykres_PB1.Bitmap;
         }
-        #endregion 
+        #endregion
+
+        #region Sekcja 4 LUT i Zoom
 
         private void tozsamosc_radioButton_CheckedChanged(object sender, EventArgs e)
         {
@@ -824,5 +826,7 @@ namespace Kolor
             lut_image_var.Data = temp_lut;
             lut_image.Image = lut_image_var.Bitmap;
         }
+
+        #endregion
     }
 }
