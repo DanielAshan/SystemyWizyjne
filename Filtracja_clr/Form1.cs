@@ -383,7 +383,13 @@ namespace Filtracja
             {
                 for (int y = 1; y < desired_image_size.Height - 1; y++)
                 {
-
+                    for (int i = 0; i <= 2; i++)
+                    {
+                        int[] tab = { (int)temp1[y - 1, x - 1, i], (int)temp1[y - 1, x, i], (int)temp1[y - 1, x + 1, i],
+                        (int)temp1[y, x - 1, i], (int)temp1[y, x, i], (int)temp1[y, x + 1, i],
+                        (int)temp1[y + 1, x - 1, i], (int)temp1[y + 1, x, i], (int)temp1[y + 1, x + 1, i] };
+                        temp2[y, x, i] = (byte)(tab.Max());
+                    }
                 }
             }
             image_buffers[2].Data = temp2;
@@ -406,7 +412,13 @@ namespace Filtracja
             {
                 for (int y = 1; y < desired_image_size.Height - 1; y++)
                 {
-
+                    for (int i = 0; i <= 2; i++)
+                    {
+                        int[] tab = { (int)temp1[y - 1, x - 1, i], (int)temp1[y - 1, x, i], (int)temp1[y - 1, x + 1, i],
+                        (int)temp1[y, x - 1, i], (int)temp1[y, x, i], (int)temp1[y, x + 1, i],
+                        (int)temp1[y + 1, x - 1, i], (int)temp1[y + 1, x, i], (int)temp1[y + 1, x + 1, i] };
+                        temp2[y, x, i] = (byte)(tab.Min());
+                    }
                 }
             }
             image_buffers[2].Data = temp2;
