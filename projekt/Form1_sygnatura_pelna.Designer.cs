@@ -81,6 +81,7 @@
             this.textBox_LW = new System.Windows.Forms.TextBox();
             this.cameraButton = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Ray_count)).BeginInit();
@@ -95,13 +96,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Average_C2M_weight)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.SuspendLayout();
             // 
             // button_Browse_Files_PB1
             // 
             this.button_Browse_Files_PB1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.button_Browse_Files_PB1.Location = new System.Drawing.Point(619, 6);
-            this.button_Browse_Files_PB1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button_Browse_Files_PB1.Margin = new System.Windows.Forms.Padding(4);
             this.button_Browse_Files_PB1.Name = "button_Browse_Files_PB1";
             this.button_Browse_Files_PB1.Size = new System.Drawing.Size(37, 25);
             this.button_Browse_Files_PB1.TabIndex = 57;
@@ -112,7 +114,7 @@
             // textBox_Image_Path_PB1
             // 
             this.textBox_Image_Path_PB1.Location = new System.Drawing.Point(75, 7);
-            this.textBox_Image_Path_PB1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox_Image_Path_PB1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_Image_Path_PB1.Name = "textBox_Image_Path_PB1";
             this.textBox_Image_Path_PB1.Size = new System.Drawing.Size(535, 22);
             this.textBox_Image_Path_PB1.TabIndex = 56;
@@ -131,7 +133,7 @@
             // button_From_File_PB1
             // 
             this.button_From_File_PB1.Location = new System.Drawing.Point(664, 6);
-            this.button_From_File_PB1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button_From_File_PB1.Margin = new System.Windows.Forms.Padding(4);
             this.button_From_File_PB1.Name = "button_From_File_PB1";
             this.button_From_File_PB1.Size = new System.Drawing.Size(64, 25);
             this.button_From_File_PB1.TabIndex = 58;
@@ -142,7 +144,7 @@
             // button_Czysc
             // 
             this.button_Czysc.Location = new System.Drawing.Point(7, 442);
-            this.button_Czysc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button_Czysc.Margin = new System.Windows.Forms.Padding(4);
             this.button_Czysc.Name = "button_Czysc";
             this.button_Czysc.Size = new System.Drawing.Size(81, 31);
             this.button_Czysc.TabIndex = 82;
@@ -154,7 +156,7 @@
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Black;
             this.pictureBox1.Location = new System.Drawing.Point(7, 139);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(427, 295);
             this.pictureBox1.TabIndex = 83;
@@ -166,7 +168,7 @@
             // 
             this.pictureBox2.BackColor = System.Drawing.Color.Black;
             this.pictureBox2.Location = new System.Drawing.Point(441, 139);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(427, 295);
             this.pictureBox2.TabIndex = 84;
@@ -175,7 +177,7 @@
             // button_Draw_example_rays
             // 
             this.button_Draw_example_rays.Location = new System.Drawing.Point(8, 23);
-            this.button_Draw_example_rays.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button_Draw_example_rays.Margin = new System.Windows.Forms.Padding(4);
             this.button_Draw_example_rays.Name = "button_Draw_example_rays";
             this.button_Draw_example_rays.Size = new System.Drawing.Size(224, 55);
             this.button_Draw_example_rays.TabIndex = 85;
@@ -186,7 +188,7 @@
             // numericUpDown_Ray_count
             // 
             this.numericUpDown_Ray_count.Location = new System.Drawing.Point(327, 27);
-            this.numericUpDown_Ray_count.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numericUpDown_Ray_count.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDown_Ray_count.Maximum = new decimal(new int[] {
             5000,
             0,
@@ -210,7 +212,7 @@
             // numericUpDown_Ray_slowdown
             // 
             this.numericUpDown_Ray_slowdown.Location = new System.Drawing.Point(372, 54);
-            this.numericUpDown_Ray_slowdown.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numericUpDown_Ray_slowdown.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDown_Ray_slowdown.Name = "numericUpDown_Ray_slowdown";
             this.numericUpDown_Ray_slowdown.Size = new System.Drawing.Size(63, 22);
             this.numericUpDown_Ray_slowdown.TabIndex = 87;
@@ -225,7 +227,7 @@
             // 
             this.checkBox_Enable_slowdown.AutoSize = true;
             this.checkBox_Enable_slowdown.Location = new System.Drawing.Point(253, 55);
-            this.checkBox_Enable_slowdown.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkBox_Enable_slowdown.Margin = new System.Windows.Forms.Padding(4);
             this.checkBox_Enable_slowdown.Name = "checkBox_Enable_slowdown";
             this.checkBox_Enable_slowdown.Size = new System.Drawing.Size(113, 21);
             this.checkBox_Enable_slowdown.TabIndex = 88;
@@ -247,7 +249,7 @@
             this.radioButton_Draw_clockwise.AutoSize = true;
             this.radioButton_Draw_clockwise.Checked = true;
             this.radioButton_Draw_clockwise.Location = new System.Drawing.Point(8, 27);
-            this.radioButton_Draw_clockwise.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radioButton_Draw_clockwise.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton_Draw_clockwise.Name = "radioButton_Draw_clockwise";
             this.radioButton_Draw_clockwise.Size = new System.Drawing.Size(151, 21);
             this.radioButton_Draw_clockwise.TabIndex = 90;
@@ -259,7 +261,7 @@
             // 
             this.radioButton_Draw_counterclockwise.AutoSize = true;
             this.radioButton_Draw_counterclockwise.Location = new System.Drawing.Point(8, 54);
-            this.radioButton_Draw_counterclockwise.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radioButton_Draw_counterclockwise.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton_Draw_counterclockwise.Name = "radioButton_Draw_counterclockwise";
             this.radioButton_Draw_counterclockwise.Size = new System.Drawing.Size(161, 21);
             this.radioButton_Draw_counterclockwise.TabIndex = 91;
@@ -279,7 +281,7 @@
             // numericUpDown_Start_angle
             // 
             this.numericUpDown_Start_angle.Location = new System.Drawing.Point(327, 55);
-            this.numericUpDown_Start_angle.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numericUpDown_Start_angle.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDown_Start_angle.Maximum = new decimal(new int[] {
             360,
             0,
@@ -299,7 +301,7 @@
             // 
             this.pictureBox3.BackColor = System.Drawing.Color.Black;
             this.pictureBox3.Location = new System.Drawing.Point(7, 480);
-            this.pictureBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(861, 209);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -309,7 +311,7 @@
             // numericUpDown_Moving_Average
             // 
             this.numericUpDown_Moving_Average.Location = new System.Drawing.Point(251, 49);
-            this.numericUpDown_Moving_Average.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numericUpDown_Moving_Average.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDown_Moving_Average.Maximum = new decimal(new int[] {
             300,
             0,
@@ -335,9 +337,9 @@
             this.groupBox1.Controls.Add(this.button_Filter_minmax);
             this.groupBox1.Controls.Add(this.button_Filter_average);
             this.groupBox1.Location = new System.Drawing.Point(7, 818);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(387, 198);
             this.groupBox1.TabIndex = 97;
             this.groupBox1.TabStop = false;
@@ -347,7 +349,7 @@
             // 
             this.checkBo_Binary_dont_clr.AutoSize = true;
             this.checkBo_Binary_dont_clr.Location = new System.Drawing.Point(120, 171);
-            this.checkBo_Binary_dont_clr.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkBo_Binary_dont_clr.Margin = new System.Windows.Forms.Padding(4);
             this.checkBo_Binary_dont_clr.Name = "checkBo_Binary_dont_clr";
             this.checkBo_Binary_dont_clr.Size = new System.Drawing.Size(138, 21);
             this.checkBo_Binary_dont_clr.TabIndex = 106;
@@ -379,7 +381,7 @@
             this.panel1.Controls.Add(this.radioButton_Max);
             this.panel1.Controls.Add(this.radioButton_Min);
             this.panel1.Location = new System.Drawing.Point(113, 81);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(236, 50);
             this.panel1.TabIndex = 101;
@@ -399,7 +401,7 @@
             this.radioButton_Max.AutoSize = true;
             this.radioButton_Max.Checked = true;
             this.radioButton_Max.Location = new System.Drawing.Point(5, 22);
-            this.radioButton_Max.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radioButton_Max.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton_Max.Name = "radioButton_Max";
             this.radioButton_Max.Size = new System.Drawing.Size(54, 21);
             this.radioButton_Max.TabIndex = 99;
@@ -411,7 +413,7 @@
             // 
             this.radioButton_Min.AutoSize = true;
             this.radioButton_Min.Location = new System.Drawing.Point(91, 22);
-            this.radioButton_Min.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radioButton_Min.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton_Min.Name = "radioButton_Min";
             this.radioButton_Min.Size = new System.Drawing.Size(51, 21);
             this.radioButton_Min.TabIndex = 100;
@@ -421,7 +423,7 @@
             // numericUpDown_Filter_width
             // 
             this.numericUpDown_Filter_width.Location = new System.Drawing.Point(121, 49);
-            this.numericUpDown_Filter_width.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numericUpDown_Filter_width.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDown_Filter_width.Maximum = new decimal(new int[] {
             300,
             0,
@@ -439,7 +441,7 @@
             // button_Filter_binary
             // 
             this.button_Filter_binary.Location = new System.Drawing.Point(8, 139);
-            this.button_Filter_binary.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button_Filter_binary.Margin = new System.Windows.Forms.Padding(4);
             this.button_Filter_binary.Name = "button_Filter_binary";
             this.button_Filter_binary.Size = new System.Drawing.Size(101, 50);
             this.button_Filter_binary.TabIndex = 61;
@@ -450,7 +452,7 @@
             // button_Filter_minmax
             // 
             this.button_Filter_minmax.Location = new System.Drawing.Point(8, 81);
-            this.button_Filter_minmax.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button_Filter_minmax.Margin = new System.Windows.Forms.Padding(4);
             this.button_Filter_minmax.Name = "button_Filter_minmax";
             this.button_Filter_minmax.Size = new System.Drawing.Size(101, 50);
             this.button_Filter_minmax.TabIndex = 60;
@@ -461,7 +463,7 @@
             // button_Filter_average
             // 
             this.button_Filter_average.Location = new System.Drawing.Point(8, 23);
-            this.button_Filter_average.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button_Filter_average.Margin = new System.Windows.Forms.Padding(4);
             this.button_Filter_average.Name = "button_Filter_average";
             this.button_Filter_average.Size = new System.Drawing.Size(101, 50);
             this.button_Filter_average.TabIndex = 59;
@@ -472,7 +474,7 @@
             // button_Czysc3
             // 
             this.button_Czysc3.Location = new System.Drawing.Point(787, 442);
-            this.button_Czysc3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button_Czysc3.Margin = new System.Windows.Forms.Padding(4);
             this.button_Czysc3.Name = "button_Czysc3";
             this.button_Czysc3.Size = new System.Drawing.Size(81, 31);
             this.button_Czysc3.TabIndex = 98;
@@ -494,7 +496,7 @@
             // button_Czysc2
             // 
             this.button_Czysc2.Location = new System.Drawing.Point(441, 442);
-            this.button_Czysc2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button_Czysc2.Margin = new System.Windows.Forms.Padding(4);
             this.button_Czysc2.Name = "button_Czysc2";
             this.button_Czysc2.Size = new System.Drawing.Size(81, 31);
             this.button_Czysc2.TabIndex = 100;
@@ -512,9 +514,9 @@
             this.groupBox2.Controls.Add(this.radioButton_Average_constant);
             this.groupBox2.Controls.Add(this.numericUpDown_Moving_Average);
             this.groupBox2.Location = new System.Drawing.Point(7, 697);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox2.Size = new System.Drawing.Size(387, 114);
             this.groupBox2.TabIndex = 101;
             this.groupBox2.TabStop = false;
@@ -529,7 +531,7 @@
             0,
             131072});
             this.numericUpDown_Average_C2M_weight.Location = new System.Drawing.Point(251, 79);
-            this.numericUpDown_Average_C2M_weight.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numericUpDown_Average_C2M_weight.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDown_Average_C2M_weight.Maximum = new decimal(new int[] {
             1,
             0,
@@ -548,7 +550,7 @@
             // 
             this.checkBox_Mix_averages.AutoSize = true;
             this.checkBox_Mix_averages.Location = new System.Drawing.Point(8, 80);
-            this.checkBox_Mix_averages.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkBox_Mix_averages.Margin = new System.Windows.Forms.Padding(4);
             this.checkBox_Mix_averages.Name = "checkBox_Mix_averages";
             this.checkBox_Mix_averages.Size = new System.Drawing.Size(228, 21);
             this.checkBox_Mix_averages.TabIndex = 105;
@@ -569,7 +571,7 @@
             // 
             this.radioButton_Average_minmax.AutoSize = true;
             this.radioButton_Average_minmax.Location = new System.Drawing.Point(168, 23);
-            this.radioButton_Average_minmax.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radioButton_Average_minmax.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton_Average_minmax.Name = "radioButton_Average_minmax";
             this.radioButton_Average_minmax.Size = new System.Drawing.Size(167, 21);
             this.radioButton_Average_minmax.TabIndex = 102;
@@ -580,7 +582,7 @@
             // 
             this.radioButton_Average_moving.AutoSize = true;
             this.radioButton_Average_moving.Location = new System.Drawing.Point(8, 52);
-            this.radioButton_Average_moving.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radioButton_Average_moving.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton_Average_moving.Name = "radioButton_Average_moving";
             this.radioButton_Average_moving.Size = new System.Drawing.Size(137, 21);
             this.radioButton_Average_moving.TabIndex = 101;
@@ -592,7 +594,7 @@
             this.radioButton_Average_constant.AutoSize = true;
             this.radioButton_Average_constant.Checked = true;
             this.radioButton_Average_constant.Location = new System.Drawing.Point(8, 23);
-            this.radioButton_Average_constant.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radioButton_Average_constant.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton_Average_constant.Name = "radioButton_Average_constant";
             this.radioButton_Average_constant.Size = new System.Drawing.Size(112, 21);
             this.radioButton_Average_constant.TabIndex = 100;
@@ -603,7 +605,7 @@
             // button_Raycast_average
             // 
             this.button_Raycast_average.Location = new System.Drawing.Point(401, 754);
-            this.button_Raycast_average.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button_Raycast_average.Margin = new System.Windows.Forms.Padding(4);
             this.button_Raycast_average.Name = "button_Raycast_average";
             this.button_Raycast_average.Size = new System.Drawing.Size(104, 50);
             this.button_Raycast_average.TabIndex = 102;
@@ -614,7 +616,7 @@
             // button_Redraw_raycast
             // 
             this.button_Redraw_raycast.Location = new System.Drawing.Point(401, 697);
-            this.button_Redraw_raycast.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button_Redraw_raycast.Margin = new System.Windows.Forms.Padding(4);
             this.button_Redraw_raycast.Name = "button_Redraw_raycast";
             this.button_Redraw_raycast.Size = new System.Drawing.Size(104, 50);
             this.button_Redraw_raycast.TabIndex = 103;
@@ -625,7 +627,7 @@
             // button_Diff_raycast
             // 
             this.button_Diff_raycast.Location = new System.Drawing.Point(401, 812);
-            this.button_Diff_raycast.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button_Diff_raycast.Margin = new System.Windows.Forms.Padding(4);
             this.button_Diff_raycast.Name = "button_Diff_raycast";
             this.button_Diff_raycast.Size = new System.Drawing.Size(104, 50);
             this.button_Diff_raycast.TabIndex = 104;
@@ -636,7 +638,7 @@
             // button_Count_vertices
             // 
             this.button_Count_vertices.Location = new System.Drawing.Point(401, 870);
-            this.button_Count_vertices.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button_Count_vertices.Margin = new System.Windows.Forms.Padding(4);
             this.button_Count_vertices.Name = "button_Count_vertices";
             this.button_Count_vertices.Size = new System.Drawing.Size(104, 50);
             this.button_Count_vertices.TabIndex = 105;
@@ -650,9 +652,9 @@
             this.groupBox3.Controls.Add(this.numericUpDown_Ray_slowdown);
             this.groupBox3.Controls.Add(this.checkBox_Enable_slowdown);
             this.groupBox3.Location = new System.Drawing.Point(7, 39);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox3.Size = new System.Drawing.Size(456, 92);
             this.groupBox3.TabIndex = 106;
             this.groupBox3.TabStop = false;
@@ -668,9 +670,9 @@
             this.groupBox4.Controls.Add(this.label3);
             this.groupBox4.Controls.Add(this.numericUpDown_Start_angle);
             this.groupBox4.Location = new System.Drawing.Point(471, 39);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox4.Size = new System.Drawing.Size(397, 92);
             this.groupBox4.TabIndex = 107;
             this.groupBox4.TabStop = false;
@@ -681,7 +683,7 @@
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1});
             this.listView1.Location = new System.Drawing.Point(513, 697);
-            this.listView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.listView1.Margin = new System.Windows.Forms.Padding(4);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(353, 319);
             this.listView1.TabIndex = 108;
@@ -707,7 +709,7 @@
             // 
             this.textBox_LW.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.textBox_LW.Location = new System.Drawing.Point(401, 974);
-            this.textBox_LW.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox_LW.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_LW.Name = "textBox_LW";
             this.textBox_LW.Size = new System.Drawing.Size(103, 41);
             this.textBox_LW.TabIndex = 109;
@@ -715,7 +717,7 @@
             // cameraButton
             // 
             this.cameraButton.Location = new System.Drawing.Point(736, 7);
-            this.cameraButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cameraButton.Margin = new System.Windows.Forms.Padding(4);
             this.cameraButton.Name = "cameraButton";
             this.cameraButton.Size = new System.Drawing.Size(72, 25);
             this.cameraButton.TabIndex = 110;
@@ -725,13 +727,25 @@
             // 
             // timer1
             // 
+            this.timer1.Interval = 500;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.BackColor = System.Drawing.Color.Black;
+            this.pictureBox4.Location = new System.Drawing.Point(883, 139);
+            this.pictureBox4.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(427, 295);
+            this.pictureBox4.TabIndex = 111;
+            this.pictureBox4.TabStop = false;
             // 
             // Form1_sygnatura_pelna
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(869, 1019);
+            this.ClientSize = new System.Drawing.Size(1323, 1019);
+            this.Controls.Add(this.pictureBox4);
             this.Controls.Add(this.cameraButton);
             this.Controls.Add(this.textBox_LW);
             this.Controls.Add(this.label6);
@@ -755,7 +769,7 @@
             this.Controls.Add(this.button_Browse_Files_PB1);
             this.Controls.Add(this.textBox_Image_Path_PB1);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1_sygnatura_pelna";
             this.Text = "SW T7 - sygnatura radialna";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -777,6 +791,7 @@
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -836,6 +851,7 @@
         private System.Windows.Forms.CheckBox checkBo_Binary_dont_clr;
         private System.Windows.Forms.Button cameraButton;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.PictureBox pictureBox4;
     }
 }
 
