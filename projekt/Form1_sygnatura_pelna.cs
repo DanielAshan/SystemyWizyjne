@@ -7,10 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json;
+using IronPython;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
 
 using Emgu.CV;
 using Emgu.CV.Structure;
 using System.Threading;
+using IronPython.Hosting;
+using Microsoft.Scripting.Hosting;
+using System.Diagnostics;
+using System.IO;
 
 namespace SW_T7
 {
@@ -43,7 +53,7 @@ namespace SW_T7
 
         Boolean Movie;
 
-
+        
         Queue<Point> pix_tlace = new Queue<Point>();
         Queue<Point> pix_palace = new Queue<Point>();
         Queue<Point> pix_nadpalone = new Queue<Point>();
@@ -63,11 +73,17 @@ namespace SW_T7
         bool pozar = false;
         bool mech = false;
         bool srodek = false;
-        Point Pc;
+        bool sygnatura = false;
         Point srodek_ciezkosci = new Point();
         //private bool skos = false;
         //private bool cecha_dowolna = false;
         //
+
+        List<Array> train_set = new List<Array>();
+        List<Array> test_set = new List<Array>();
+        int ilosc_sygnatur = 0;
+        bool gatherData = false;
+        bool gestureRecognition = false;
 
         public Form1_sygnatura_pelna()
         {
@@ -95,7 +111,7 @@ namespace SW_T7
             try
             {
                 //Domyślnie połączy się z pierwszym urządzeniem video na liście urządzeń
-                kamera = new VideoCapture(1);
+                kamera = new VideoCapture();
                 //Ustawienia wysokości i szerokości obrazu
                 kamera.SetCaptureProperty(Emgu.CV.CvEnum.CapProp.FrameWidth, 320);
                 kamera.SetCaptureProperty(Emgu.CV.CvEnum.CapProp.FrameHeight, 240);
@@ -393,7 +409,7 @@ namespace SW_T7
             }
 
             pictureBox4.Image = image_PB4.Bitmap;
-
+            sygnatura = true;
             return promienie;
         }
 
@@ -450,6 +466,7 @@ namespace SW_T7
 
 
             pictureBox3.Image = image_PB3.Bitmap;
+            sygnatura = false;
         }
         
         #endregion
@@ -733,6 +750,40 @@ namespace SW_T7
             }
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Mat temp = kamera.QueryFrame();
+            CvInvoke.Resize(temp, temp, pictureBox1.Size);
+            image_PB1 = temp.ToImage<Bgr, byte>();
+            image_PB2 = temp.ToImage<Bgr, byte>();
+            pictureBox1.Image = image_PB1.Bitmap;
+            pictureBox2.Image = image_PB1.Bitmap;
+            Closing();
+            Opening();
+            mono();
+            thresholding();
+            nr_pozaru = 0;
+            Pozar_Calosci();
+            if (nr_pozaru != 0)
+            {
+                mechanika();
+                System.Diagnostics.Debug.WriteLine("Srodek " + srodek);
+                if (srodek)
+                {
+                    System.Diagnostics.Debug.WriteLine("Tworze sygnature");
+                    tabela_promieni = sygnatura_radialna(srodek_ciezkosci);
+                    if (sygnatura)
+                    {
+                        czysc_obraz(image_PB3, pictureBox3);
+                        namaluj_dane_z_tabeli(tabela_promieni, null, new MCvScalar(255, 0, 0), TrybRysowania.TYLKO_DANE);
+                        tabela_wartosci_srednich = wylicz_srednia_z_sygnatury(tabela_promieni);
+                        licz_wierzcholki(tabela_promieni, tabela_wartosci_srednich);
+
+                    }
+                }
+            }
+        }
+
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (nr_pozaru == 0)
@@ -754,8 +805,47 @@ namespace SW_T7
                     if (srodek)
                     {
                         System.Diagnostics.Debug.WriteLine("Tworze sygnature");
-                        sygnatura_radialna(srodek_ciezkosci);
+                        tabela_promieni = sygnatura_radialna(srodek_ciezkosci);
+                    if (gatherData)
+                    {
+                        if (ilosc_sygnatur < 80)
+                        {
+                            train_set.Add(tabela_promieni);
+                        }
+                        else
+                        {
+                            test_set.Add(tabela_promieni);
+                        }
+                        ilosc_sygnatur++;
+                        signatureCountLabel.Text = "Zebrano " + ilosc_sygnatur.ToString();
+                        if (ilosc_sygnatur == 100)
+                        {
+                            string train_set_json = JsonConvert.SerializeObject(train_set, Formatting.Indented);
+                            string test_set_json = JsonConvert.SerializeObject(test_set, Formatting.Indented);
+                            gatherDataToggle();
+                            System.IO.File.WriteAllText(@"C:\projects\systemy_wizyjne\projekt\datasets\train_set_3_boy.txt", train_set_json);
+                            System.IO.File.WriteAllText(@"C:\projects\systemy_wizyjne\projekt\datasets\test_set_3_boy.txt", test_set_json);
+                        }
                     }
+                    if (gestureRecognition)
+                    {
+                        string json = JsonConvert.SerializeObject(tabela_promieni, Formatting.Indented);
+                        System.IO.File.WriteAllText(@".\data.txt", json);
+                        callAPIAsync();
+
+                    }
+                        
+                        //foreach(int element)
+
+                    //    if(sygnatura)
+                    //{
+                    //    czysc_obraz(image_PB3, pictureBox3);
+                    //    //namaluj_dane_z_tabeli(tabela_promieni, null, new MCvScalar(255, 0, 0), TrybRysowania.TYLKO_DANE);
+                    //    //tabela_wartosci_srednich = wylicz_srednia_z_sygnatury(tabela_promieni);
+                    //    //licz_wierzcholki(tabela_promieni, tabela_wartosci_srednich);
+                    //}
+                        
+                }
             }
             nr_pozaru = 0;
             Pozar_Calosci();
@@ -768,7 +858,7 @@ namespace SW_T7
         {
             for (int i = 0; i <= 255; i++)
             {
-                if (i >= 100)
+                if (i >= 150)
                 {
                     LUT[i] = 255;
                 }
@@ -1025,6 +1115,30 @@ namespace SW_T7
             }
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            gatherDataToggle();
+        }
+
+        private void gatherDataToggle()
+        {
+            gatherData = !gatherData;
+
+            if (gatherData)
+            {
+                dataGatheringLabel.Text = "Working!";
+            }
+            else
+            {
+                dataGatheringLabel.Text = "Stopped!";
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            gestureRecognitionToggle();
+        }
+
         private Point[] Wylicz_wspolrzedne_sasiednich_pikseli(Point pix_in)
         {
             List<Point> sasiedzi = new List<Point>();
@@ -1109,7 +1223,48 @@ namespace SW_T7
             }
 
         }
-    }
+
+        private void gestureRecognitionToggle()
+        {
+            gestureRecognition = !gestureRecognition;
+            if(gestureRecognition)
+            {
+                gestureRecognitionLabel.Text = "Working";
+            } else
+            {
+                gestureRecognitionLabel.Text = "Stopped";
+            }
+        }
+
+        private string doPython()
+        {
+            string fileName = ".\\script.py";
+
+            Process p = new Process();
+            p.StartInfo = new ProcessStartInfo(@"C:\Users\Admin1\.windows-build-tools\python27\python.exe", fileName)
+            {
+                RedirectStandardOutput = true,
+                UseShellExecute = false,
+                CreateNoWindow = true
+            };
+            p.Start();
+            System.Diagnostics.Debug.WriteLine(p.StandardOutput.ReadToEnd());
+
+            string output = p.StandardOutput.ReadToEnd();
+            return output;
+            p.Close();
+        }
+        
+        private async void callAPIAsync()
+        {
+            HttpClient client = new HttpClient();
+
+            HttpResponseMessage response = await client.GetAsync("http://127.0.0.1:5000/");
+            HttpContent content = response.Content;
+            string result = await content.ReadAsStringAsync();
+            gestureLabel.Text = result;
+        }
+}
 
     public struct FilterParams
     {
